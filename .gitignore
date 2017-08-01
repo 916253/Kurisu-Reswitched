@@ -1,0 +1,9 @@
+*.ini
+*.sh
+*.log
+*.json
+*.sqlite
+._*
+.DS_Store
+__pycache__
+data/
