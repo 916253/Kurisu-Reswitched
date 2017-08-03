@@ -40,7 +40,7 @@ class Mod:
         await self.bot.say("👋 Bye bye!")
         await self.bot.close()
 
-    @commands.has_permissions(manage_server=True)
+    @commands.has_permissions(ban_members=True)
     @commands.command(pass_context=True, hidden=True)
     async def userinfo(self, ctx, user):
         """Gets user info. SuperOP+."""

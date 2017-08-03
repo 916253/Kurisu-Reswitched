@@ -186,6 +186,7 @@ addons = [
     'addons.err',
     'addons.auto_probation',
     'addons.nxerr',
+    'addons.things',
     'addons.mod_warn',
 ]
 
