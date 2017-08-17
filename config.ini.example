@@ -1,2 +1,4 @@
 [Main]
 token = 
+[Probate]
+phrases = something1,... ; must be 12 long, no spaces inbetween

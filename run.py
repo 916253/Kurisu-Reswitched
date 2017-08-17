@@ -101,6 +101,8 @@ async def on_ready():
         print("{} has started! {} has {:,} members!".format(bot.user.name, server.name, server.member_count))
         bot.server = server
 
+        bot.config = config
+
         # channels
         bot.welcome_channel = discord.utils.get(server.channels, name="welcome-and-rules")
         bot.announcements_channel = discord.utils.get(server.channels, name="news")
