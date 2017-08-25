@@ -28,14 +28,14 @@ class ModWarn:
         if self.bot.staff_role in member.roles:
             await self.bot.say("You can't warn another staffer with this command!")
             return
-        with open("data/warns.json", "r") as f:
+        with open("data/warnsv2.json", "r") as f:
             warns = json.load(f)
         if member.id not in warns:
-            warns[member.id] = {"warns": {}}
+            warns[member.id] = {"warns": []}
         warns[member.id]["name"] = member.name + "#" + member.discriminator
         timestamp = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-        warns[member.id]["warns"][len(warns[member.id]["warns"]) + 1] = {"issuer_id": issuer.id, "issuer_name": issuer.name, "reason": reason, "timestamp": timestamp}
-        with open("data/warns.json", "w") as f:
+        warns[member.id]["warns"].append({"issuer_id": issuer.id, "issuer_name": issuer.name, "reason": reason, "timestamp": timestamp})
+        with open("data/warnsv2.json", "w") as f:
             json.dump(warns, f)
         msg = "You were warned on {}.".format(self.bot.server.name)
         if reason != "":
@@ -79,18 +79,15 @@ class ModWarn:
             return
         embed = discord.Embed(color=discord.Color.dark_red())
         embed.set_author(name="Warns for {}#{}".format(member.display_name, member.discriminator), icon_url=member.avatar_url)
-        with open("data/warns.json", "r") as f:
+        with open("data/warnsv2.json", "r") as f:
             warns = json.load(f)
-        # crappy workaround given how dicts are not ordered
         try:
-            warn_count = len(warns[member.id]["warns"])
-            if warn_count == 0:
+            if len(warns[member.id]["warns"]) == 0:
                 embed.description = "There are none!"
                 embed.color = discord.Color.green()
             else:
-                for key in range(warn_count):
-                    warn = warns[member.id]["warns"][str(key + 1)]
-                    embed.add_field(name="{}: {}".format(key + 1, warn["timestamp"]), value="Issuer: {}\nReason: {}".format(warn["issuer_name"], warn["reason"]))
+                for idx, warn in enumerate(warns[member.id]["warns"]):
+                    embed.add_field(name="{}: {}".format(idx + 1, warn["timestamp"]), value="Issuer: {}\nReason: {}".format(warn["issuer_name"], warn["reason"]))
         except KeyError:  # if the user is not in the file
             embed.description = "There are none!"
             embed.color = discord.Color.green()
@@ -101,24 +98,85 @@ class ModWarn:
     async def listwarnsid(self, ctx, user_id):
         """List warns for a user based on ID. Staff only."""
         embed = discord.Embed(color=discord.Color.dark_red())
-        with open("data/warns.json", "r") as f:
+        with open("data/warnsv2.json", "r") as f:
             warns = json.load(f)
         # crappy workaround given how dicts are not ordered
         try:
-            warn_count = len(warns[user_id]["warns"])
             embed.set_author(name="Warns for {}".format(warns[user_id]["name"]))
-            if warn_count == 0:
+            if len(warns[user_id]["warns"]) == 0:
                 embed.description = "There are none!"
                 embed.color = discord.Color.green()
             else:
-                for key in range(warn_count):
-                    warn = warns[user_id]["warns"][str(key + 1)]
-                    embed.add_field(name="{}: {}".format(key + 1, warn["timestamp"]), value="Issuer: {}\nReason: {}".format(warn["issuer_name"], warn["reason"]))
+                for idx, warn in enumerate(warn_count):
+                    embed.add_field(name="{}: {}".format(idx + 1, warn["timestamp"]), value="Issuer: {}\nReason: {}".format(warn["issuer_name"], warn["reason"]))
         except KeyError:  # if the user is not in the file
             embed.set_author(name="Warns for {}".format(user_id))
             embed.description = "ID doesn't exist in saved warnings."
             embed.color = discord.Color.green()
         await self.bot.say("", embed=embed)
+
+    @commands.has_permissions(ban_members=True)
+    @commands.command(pass_context=True)
+    async def delwarn(self, ctx, user, idx: int):
+        """Remove a specific warn from a user. Staff only."""
+        try:
+            member = ctx.message.mentions[0]
+        except IndexError:
+            await self.bot.say("Please mention a user.")
+            return
+        with open("data/warnsv2.json", "r") as f:
+            warns = json.load(f)
+        if member.id not in warns:
+            await self.bot.say("{} has no warns!".format(member.mention))
+            return
+        warn_count = len(warns[member.id]["warns"])
+        if warn_count == 0:
+            await self.bot.say("{} has no warns!".format(member.mention))
+            return
+        if idx > warn_count:
+            await self.bot.say("Warn index is higher than warn count ({})!".format(warn_count))
+            return
+        if idx < 1:
+            await self.bot.say("Warn index is below 1!")
+            return
+        warn = warns[member.id]["warns"][idx - 1]
+        embed = discord.Embed(color=discord.Color.dark_red(), title="Warn {} on {}".format(idx, warn["timestamp"]),
+                              description="Issuer: {0[issuer_name]}\nReason: {0[reason]}".format(warn))
+        del warns[member.id]["warns"][idx - 1]
+        with open("data/warnsv2.json", "w") as f:
+            json.dump(warns, f)
+        await self.bot.say("{} has a warning removed!".format(member.mention))
+        msg = "🗑 **Deleted warn**: {} removed warn {} from {} | {}#{}".format(ctx.message.author.mention, idx, member.mention, member.name, member.discriminator)
+        await self.bot.send_message(self.bot.modlogs_channel, msg, embed=embed)
+
+    @commands.has_permissions(ban_members=True)
+    @commands.command(pass_context=True)
+    async def delwarnid(self, ctx, user_id, idx: int):
+        """Remove a specific warn from a user based on ID. Staff only."""
+        with open("data/warnsv2.json", "r") as f:
+            warns = json.load(f)
+        if user_id not in warns:
+            await self.bot.say("{} doesn't exist in saved warnings.".format(user_id))
+            return
+        warn_count = len(warns[user_id]["warns"])
+        if warn_count == 0:
+            await self.bot.say("{} has no warns!".format(warns[user_id]["name"]))
+            return
+        if idx > warn_count:
+            await self.bot.say("Warn index is higher than warn count ({})!".format(warn_count))
+            return
+        if idx < 1:
+            await self.bot.say("Warn index is below 1!")
+            return
+        warn = warns[user_id]["warns"][idx - 1]
+        embed = discord.Embed(color=discord.Color.dark_red(), title="Warn {} on {}".format(idx, warn["timestamp"]),
+                              description="Issuer: {0[issuer_name]}\nReason: {0[reason]}".format(warn))
+        del warns[user_id]["warns"][idx - 1]
+        with open("data/warnsv2.json", "w") as f:
+            json.dump(warns, f)
+        await self.bot.say("{} has a warning removed!".format(warns[user_id]["name"]))
+        msg = "🗑 **Deleted warn**: {} removed warn {} from {} ({})".format(ctx.message.author.mention, idx, warns[user_id]["name"], user_id)
+        await self.bot.send_message(self.bot.modlogs_channel, msg, embed=embed)
 
     @commands.has_permissions(ban_members=True)
     @commands.command(pass_context=True)
@@ -129,7 +187,7 @@ class ModWarn:
         except IndexError:
             await self.bot.say("Please mention a user.")
             return
-        with open("data/warns.json", "r") as f:
+        with open("data/warnsv2.json", "r") as f:
             warns = json.load(f)
         if member.id not in warns:
             await self.bot.say("{} has no warns!".format(member.mention))
@@ -138,8 +196,8 @@ class ModWarn:
         if warn_count == 0:
             await self.bot.say("{} has no warns!".format(member.mention))
             return
-        warns[member.id]["warns"] = {}
-        with open("data/warns.json", "w") as f:
+        warns[member.id]["warns"] = []
+        with open("data/warnsv2.json", "w") as f:
             json.dump(warns, f)
         await self.bot.say("{} no longer has any warns!".format(member.mention))
         msg = "🗑 **Cleared warns**: {} cleared {} warns from {} | {}#{}".format(ctx.message.author.mention, warn_count, member.mention, member.name, member.discriminator)
@@ -149,7 +207,7 @@ class ModWarn:
     @commands.command(pass_context=True)
     async def clearwarnsid(self, ctx, user_id):
         """Clear all warns for a user based on ID. Staff only."""
-        with open("data/warns.json", "r") as f:
+        with open("data/warnsv2.json", "r") as f:
             warns = json.load(f)
         if user_id not in warns:
             await self.bot.say("{} doesn't exist in saved warnings.".format(user_id))
@@ -158,8 +216,8 @@ class ModWarn:
         if warn_count == 0:
             await self.bot.say("{} has no warns!".format(warns[user_id]["name"]))
             return
-        warns[user_id]["warns"] = {}
-        with open("data/warns.json", "w") as f:
+        warns[user_id]["warns"] = []
+        with open("data/warnsv2.json", "w") as f:
             json.dump(warns, f)
         await self.bot.say("{} no longer has any warns!".format(warns[user_id]["name"]))
         msg = "🗑 **Cleared warns**: {} cleared {} warns from {} ({})".format(ctx.message.author.mention, warn_count, warns[user_id]["name"], user_id)
