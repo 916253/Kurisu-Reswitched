@@ -125,7 +125,7 @@ async def on_ready():
         bot.messagelogs_channel = discord.utils.get(server.channels, name="server-logs")
 
         # roles
-        bot.staff_role = discord.utils.get(server.roles, name="moderator")
+        bot.staff_role = discord.utils.get(server.roles, name="has moderator permissions")
         bot.halfop_role = discord.utils.get(server.roles, name="HalfOP")
         bot.op_role = discord.utils.get(server.roles, name="OP")
         bot.superop_role = discord.utils.get(server.roles, name="moderator")
