@@ -16,7 +16,7 @@ class ModWarn:
     async def warn(self, ctx, user, *, reason=""):
         """Warn a user. Staff only."""
         issuer = ctx.message.author
-        if (self.bot.superop_role not in issuer.roles) and (self.bot.owner_role not in issuer.roles) and (self.bot.verified_role not in issuer.roles) and (self.bot.trusted_role not in issuer.roles):
+        if self.bot.staff_role not in issuer.roles:
             msg = "{0} This command is limited to Staff.".format(issuer.mention)
             await self.bot.say(msg)
             return
