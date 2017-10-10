@@ -60,7 +60,7 @@ class KickBan:
             except discord.errors.Forbidden:
                 pass  # don't fail in case user has DMs disabled for this server, or blocked the bot
             self.bot.actions.append("ub:"+member.id)
-            await self.bot.ban(member, 1)
+            await self.bot.ban(member, 0)
             await self.bot.say("{} is now b&. 👍".format(self.bot.escape_name(member)))
             msg = "⛔ **Ban**: {} banned {} | {}#{}\n🏷 __User ID__: {}".format(ctx.message.author.mention, member.mention, self.bot.escape_name(member.name), member.discriminator, member.id)
             if reason != "":
@@ -80,7 +80,7 @@ class KickBan:
                 await self.bot.say("Please mention a user.")
                 return
             self.bot.actions.append("ub:"+member.id)
-            await self.bot.ban(member, 1)
+            await self.bot.ban(member, 0)
             await self.bot.say("{} is now b&. 👍".format(self.bot.escape_name(member)))
             msg = "⛔ **Silent ban**: {} banned {} | {}#{}\n🏷 __User ID__: {}".format(ctx.message.author.mention, member.mention, self.bot.escape_name(member.name), member.discriminator, member.id)
             if reason != "":
