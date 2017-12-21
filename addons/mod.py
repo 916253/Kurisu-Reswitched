@@ -65,7 +65,7 @@ class Mod:
 
     @commands.has_permissions(kick_members=True)
     @commands.command(pass_context=True, name="reset")
-    async def reset(self, ctx, limit: int):
+    async def reset(self, ctx, limit: int = 100):
         """Wipes messages in #newcomers and pastes the welcome message again. Staff only."""
         try:
             await self.bot.purge_from(ctx.message.channel, limit=limit)
