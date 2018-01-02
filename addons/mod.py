@@ -22,7 +22,7 @@ __**Be sure you read the following rules and information before participating**_
 
 **3**. If you have concerns about another user, please take up your concerns with a staff member (myself or someone with the \"moderator\" role in the sidebar) in private. Don't publicly call other users out.
 
-**4**. From time to time, we may mention everyone in the server. We do this when we feel something imporant is going on that requires attention. Complaining about these pings may result in a ban.
+**4**. From time to time, we may mention everyone in the server. We do this when we feel something important is going on that requires attention. Complaining about these pings may result in a ban.
  • To disable notifications for these pings, suppress them in "ReSwitched → Notification Settings".
 
 **5**. Don't spam.
