@@ -22,20 +22,23 @@ __**Be sure you read the following rules and information before participating**_
 
 **3**. If you have concerns about another user, please take up your concerns with a staff member (myself or someone with the \"moderator\" role in the sidebar) in private. Don't publicly call other users out.
 
-**4**. Don't spam.
+**4**. From time to time, we may mention everyone in the server. We do this when we feel something imporant is going on that requires attention. Complaining about these pings may result in a ban.
+ • To disable notifications for these pings, suppress them in "ReSwitched → Notification Settings".
+
+**5**. Don't spam.
  • For excessively long text, use a service like https://0bin.net/.
  ​• When you are asking us to give you access to the other channels, please include \"{}\" in your message. Failure to do so may result in being kicked out.
 
-**5**. Don't brigade, raid, or otherwise attack other people or communities. Don't discuss participation in these attacks. This may warrant an immediate permanent ban.
+**6**. Don't brigade, raid, or otherwise attack other people or communities. Don't discuss participation in these attacks. This may warrant an immediate permanent ban.
 
-**6**. Off-topic content goes to #off-topic. Keep low-quality content like memes out.
-
-**7**. Trying to evade, look for loopholes, or stay borderline within the rules will be treated as breaking them.
-
-​**8**. Absolutely no piracy. There is a zero-tolerance policy and we will enforce this strictly and swiftly.
+**7**. Off-topic content goes to #off-topic. Keep low-quality content like memes out.
 """
 
 welcome_2 = """
+**8**. Trying to evade, look for loopholes, or stay borderline within the rules will be treated as breaking them.
+
+​**9**. Absolutely no piracy. There is a zero-tolerance policy and we will enforce this strictly and swiftly.
+
 :hash: __Channel Breakdown:__
 #news - Used exclusively for updates on ReSwitched progress and community information. Most major announcements are passed through this channel and whenever something is posted there it's usually something you'll want to look at.
 
