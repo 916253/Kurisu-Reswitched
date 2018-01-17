@@ -88,6 +88,19 @@ class Mod:
         await self.bot.say("👋 Bye bye!")
         await self.bot.close()
 
+    @commands.command(pass_context=True, hidden=True)
+    async def pull(self, ctx):
+        """Pull new changes from GitHub and restart."""
+        issuer = ctx.message.author
+        if (self.bot.private_role not in issuer.roles) and (self.bot.owner_role not in issuer.roles):
+            msg = "{} This command is limited to private and wizards.".format(issuer.mention)
+            await self.bot.say(msg)
+            return
+        await self.bot.say("Pulling changes...")
+        call(['git', 'pull'])
+        await self.bot.say("👋 Restarting bot!")
+        await self.bot.close()
+
     @commands.has_permissions(ban_members=True)
     @commands.command(pass_context=True, hidden=True)
     async def userinfo(self, ctx, user):
