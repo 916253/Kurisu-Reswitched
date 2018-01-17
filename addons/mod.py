@@ -9,7 +9,7 @@ import time
 welcome_1 = """
 <:ReSwitched:326421448543567872> __**Welcome to ReSwitched!**__
 
-__**Be sure you read the following rules and information before participating**__:
+__**Be sure you read the following rules and information before participating. If you came here to ask about "backups", this is NOT the place.**__:
 
 ​:bookmark_tabs:__Rules:__
 **1**. Read all the rules before participating in chat. Not reading the rules is *not* an excuse for breaking them.
@@ -50,7 +50,7 @@ welcome_2 = """
 """
 
 welcome_3 = """
-**When you have read everything, send a message in this channel to ask us to give you access to the other channels. Have a nice day!**
+**When you have read everything, send a message in this channel to ask us to give you access to the other channels. Have a nice day!** \n **Note: We know if you haven't read everything.  We will kick the first time, ban the second.**
 """
 
 class Mod:
