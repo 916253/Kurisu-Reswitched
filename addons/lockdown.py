@@ -12,7 +12,7 @@ class Lockdown:
         print('Addon "{}" loaded'.format(self.__class__.__name__))
 
     @commands.has_permissions(manage_messages=True)
-    @commands.command(pass_context=True, name="lockdown")
+    @commands.command(pass_context=True, name="lock")
     async def lock(self, ctx):
        """Lock message sending in the channel. Staff only."""
        try:
