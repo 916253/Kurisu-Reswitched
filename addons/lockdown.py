@@ -13,7 +13,7 @@ class Lockdown:
 
     @commands.has_permissions(manage_messages=True)
     @commands.command(pass_context=True, name="lockdown")
-    async def lockdown(self, ctx):
+    async def lock(self, ctx):
        """Lock message sending in the channel. Staff only."""
        try:
             overwrites_everyone = ctx.message.channel.overwrites_for(self.bot.everyone_role)
