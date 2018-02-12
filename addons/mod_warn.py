@@ -107,7 +107,7 @@ class ModWarn:
                 embed.description = "There are none!"
                 embed.color = discord.Color.green()
             else:
-                for idx, warn in enumerate(warn_count):
+                for idx, warn in enumerate(warns[user_id]["warns"]):
                     embed.add_field(name="{}: {}".format(idx + 1, warn["timestamp"]), value="Issuer: {}\nReason: {}".format(warn["issuer_name"], warn["reason"]))
         except KeyError:  # if the user is not in the file
             embed.set_author(name="Warns for {}".format(user_id))
