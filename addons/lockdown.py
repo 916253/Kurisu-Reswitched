@@ -17,10 +17,11 @@ class Lockdown:
        """Lock message sending in the channel. Staff only."""
        try:
             overwrites_everyone = ctx.message.channel.overwrites_for(self.bot.everyone_role)
-            if overwrites_everyone.send_messages == False:
+            if overwrites_everyone.send_messages is False:
                 await self.bot.say("🔒 Channel is already locked down. Use `.unlock` to unlock.")
                 return
             overwrites_everyone.send_messages = False
+            overwrites_everyone.add_reactions = False
             await self.bot.edit_channel_permissions(ctx.message.channel, self.bot.everyone_role, overwrites_everyone)
             await self.bot.say("🔒 Channel locked down. Only staff members may speak. Do not bring the topic to other channels or risk disciplinary actions.")
             msg = "🔒 **Lockdown**: {0} by {1} | {2}#{3}".format(ctx.message.channel.mention, ctx.message.author.mention, ctx.message.author.name, ctx.message.author.discriminator)
@@ -36,9 +37,10 @@ class Lockdown:
        """Lock message sending in the channel, without the "disciplinary action" note. Staff only."""
        try:
             overwrites_everyone = ctx.message.channel.overwrites_for(self.bot.everyone_role)
-            if overwrites_everyone.send_messages == False:
+            if overwrites_everyone.send_messages is False:
                 await self.bot.say("🔒 Channel is already locked down. Use `.unlock` to unlock.")
                 return
+            overwrites_everyone.add_reactions = False
             overwrites_everyone.send_messages = False
             await self.bot.edit_channel_permissions(ctx.message.channel, self.bot.everyone_role, overwrites_everyone)
             await self.bot.say("🔒 Channel locked.")
@@ -58,6 +60,7 @@ class Lockdown:
                 await self.bot.say("🔓 Channel is already unlocked.")
                 return
             overwrites_everyone.send_messages = None
+            overwrites_everyone.add_reactions = None
             overwrites_staff.send_messages = True
             await self.bot.edit_channel_permissions(ctx.message.channel, self.bot.everyone_role, overwrites_everyone)
             await self.bot.edit_channel_permissions(ctx.message.channel, self.bot.staff_role, overwrites_staff)
