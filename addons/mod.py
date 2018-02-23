@@ -47,6 +47,10 @@ welcome_2 = """
 #off-topic - Channel for discussion of anything that doesn't belong in #general. Anything goes, so long as you make sure to follow the rules and be on your best behavior.
 
 #hack-n-all - Hacking discussion for things other than the switch that don't fit in the scope of #general, but need more structured discussion than #off-topic may be able to provide.
+
+#user-support - End-user focused support, mainly between users. Ask your questions about using switch homebrew here.
+
+#tool-support - Developer focused support. Ask your questions about using PegaSwitch, libtransistor, Mephisto, and other tools here.
 """
 
 welcome_3 = """
