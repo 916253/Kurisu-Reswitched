@@ -162,7 +162,7 @@ class Mod:
 
             await self.bot.say(welcome_header)
             rules = ['**{}**. {}'.format(i, cleandoc(r)) for i, r in enumerate(welcome_rules, 1)]
-            rules[randint(1, len(rules))] += '\n' + hidden_term_line.format(phrase)
+            rules[randint(1, len(rules)) - 1] += '\n' + hidden_term_line.format(phrase)
             # this should eventually generate messages to send, instead of sending it all at once which will be a problem when it goes above 2,000 characters
             await self.bot.say('\n\n'.join(rules))
             await self.bot.say(welcome_footer)
