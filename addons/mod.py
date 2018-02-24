@@ -1,44 +1,65 @@
 import discord
 import json
 import re
+from inspect import cleandoc
+from random import randint
 from discord.ext import commands
 from subprocess import call
 from sys import argv
 import time
 
-welcome_1 = """
+welcome_header = """
 <:ReSwitched:326421448543567872> __**Welcome to ReSwitched!**__
 
 __**Be sure you read the following rules and information before participating. If you came here to ask about "backups", this is NOT the place.**__:
 
 ​:bookmark_tabs:__Rules:__
-**1**. Read all the rules before participating in chat. Not reading the rules is *not* an excuse for breaking them.
- • It's suggested that you read channel topics and pins before asking questions as well, as some questions may have already been answered in those.
-
-**2**. Be nice to each other. It's fine to disagree, it's not fine to insult or attack other people.
- • You may disagree with anyone or anything you like, but you should try to keep it to opinions, and not people. Avoid vitriol.
- • Constant antagonistic behavior is considered uncivil and appropriate action will be taken.
- ​• The use of derogatory slurs -- sexist, racist, homophobic, or otherwise -- is unacceptable and may be grounds for an immediate ban.
-
-**3**. If you have concerns about another user, please take up your concerns with a staff member (myself or someone with the \"moderator\" role in the sidebar) in private. Don't publicly call other users out.
-
-**4**. From time to time, we may mention everyone in the server. We do this when we feel something important is going on that requires attention. Complaining about these pings may result in a ban.
- • To disable notifications for these pings, suppress them in "ReSwitched → Notification Settings".
-
-**5**. Don't spam.
- • For excessively long text, use a service like https://0bin.net/.
- ​• When you are asking us to give you access to the other channels, please include \"{}\" in your message. Failure to do so may result in being kicked out.
-
-**6**. Don't brigade, raid, or otherwise attack other people or communities. Don't discuss participation in these attacks. This may warrant an immediate permanent ban.
-
-**7**. Off-topic content goes to #off-topic. Keep low-quality content like memes out.
 """
 
-welcome_2 = """
-**8**. Trying to evade, look for loopholes, or stay borderline within the rules will be treated as breaking them.
+welcome_rules = (
+    # 1
+    """
+    Read all the rules before participating in chat. Not reading the rules is *not* an excuse for breaking them.
+     • It's suggested that you read channel topics and pins before asking questions as well, as some questions may have already been answered in those.
+    """,
 
-​**9**. Absolutely no piracy. There is a zero-tolerance policy and we will enforce this strictly and swiftly.
+    # 2
+    """
+    Be nice to each other. It's fine to disagree, it's not fine to insult or attack other people.
+     • You may disagree with anyone or anything you like, but you should try to keep it to opinions, and not people. Avoid vitriol.
+     • Constant antagonistic behavior is considered uncivil and appropriate action will be taken.
+     • The use of derogatory slurs -- sexist, racist, homophobic, or otherwise -- is unacceptable and may be grounds for an immediate ban.
+    """,
 
+    # 3
+    'If you have concerns about another user, please take up your concerns with a staff member (myself or someone with the "moderator" role in the sidebar) in private. Don\'t publicly call other users out.',
+
+    # 4
+    """
+    From time to time, we may mention everyone in the server. We do this when we feel something important is going on that requires attention. Complaining about these pings may result in a ban.
+     • To disable notifications for these pings, suppress them in "ReSwitched → Notification Settings".
+    """,
+
+    # 5
+    """
+    "Don't spam.
+     • For excessively long text, use a service like https://0bin.net/.
+    """,
+
+    # 6
+    "Don't brigade, raid, or otherwise attack other people or communities. Don't discuss participation in these attacks. This may warrant an immediate permanent ban.",
+
+    # 7
+    'Off-topic content goes to #off-topic. Keep low-quality content like memes out.',
+
+    # 8
+    'Trying to evade, look for loopholes, or stay borderline within the rules will be treated as breaking them.',
+
+    # 9
+    'Absolutely no piracy. There is a zero-tolerance policy and we will enforce this strictly and swiftly.',
+)
+
+welcome_footer = """
 :hash: __Channel Breakdown:__
 #news - Used exclusively for updates on ReSwitched progress and community information. Most major announcements are passed through this channel and whenever something is posted there it's usually something you'll want to look at.
 
@@ -47,11 +68,12 @@ welcome_2 = """
 #off-topic - Channel for discussion of anything that doesn't belong in #general. Anything goes, so long as you make sure to follow the rules and be on your best behavior.
 
 #hack-n-all - Hacking discussion for things other than the switch that don't fit in the scope of #general, but need more structured discussion than #off-topic may be able to provide.
-"""
 
-welcome_3 = """
 **When you have read everything, send a message in this channel to ask us to give you access to the other channels. Have a nice day!** \n **Note: We know if you haven't read everything.  We will kick the first time, ban the second.**
 """
+
+hidden_term_line = ' • When you are asking us to give you access to the other channels, please include "{}" in your message. Failure to do so may result in being kicked out.'
+
 
 class Mod:
     """
@@ -111,7 +133,6 @@ class Mod:
             role = "@ everyone"
         await self.bot.say("name = {}\nid = {}\ndiscriminator = {}\navatar = {}\nbot = {}\navatar_url = {}\ndefault_avatar = {}\ndefault_avatar_url = <{}>\ncreated_at = {}\ndisplay_name = {}\njoined_at = {}\nstatus = {}\ngame = {}\ncolour = {}\ntop_role = {}\n".format(u.name, u.id, u.discriminator, u.avatar, u.bot, u.avatar_url, u.default_avatar, u.default_avatar_url, u.created_at, u.display_name, u.joined_at, u.status, u.game, u.colour, role))
 
-
     @commands.has_permissions(ban_members=True)
     @commands.command(pass_context=True, name="clear")
     async def purge(self, ctx, limit: int):
@@ -135,9 +156,12 @@ class Mod:
             index = time.localtime().tm_hour % 12
             phrase = self.bot.config['Probate']['Phrases'].split(',')[index].strip()
 
-            await self.bot.say(welcome_1.format(phrase))
-            await self.bot.say(welcome_2)
-            await self.bot.say(welcome_3)
+            await self.bot.say(welcome_header)
+            rules = ['**{}**. {}'.format(i, cleandoc(r)) for i, r in enumerate(welcome_rules, 1)]
+            rules[randint(1, len(rules))] += '\n' + hidden_term_line.format(phrase)
+            # this should eventually generate messages to send, instead of sending it all at once which will be a problem when it goes above 2,000 characters
+            await self.bot.say('\n\n'.join(rules))
+            await self.bot.say(welcome_footer)
         except discord.errors.Forbidden:
             await self.bot.say("💢 I don't have permission to do this.")
 
