@@ -154,15 +154,17 @@ class Mod:
         """Wipes messages in #newcomers and pastes the welcome message again. Staff only."""
         try:
             await self.bot.purge_from(ctx.message.channel, limit=limit)
-            msg = "🗑 **Reset**: {} cleared {} messages in {}".format(ctx.message.author.mention, limit, ctx.message.channel.mention)
-            await self.bot.send_message(self.bot.modlogs_channel, msg)
 
             index = time.localtime().tm_hour % 12
             phrase = self.bot.config['Probate']['Phrases'].split(',')[index].strip()
 
             await self.bot.say(welcome_header)
             rules = ['**{}**. {}'.format(i, cleandoc(r)) for i, r in enumerate(welcome_rules, 1)]
-            rules[randint(1, len(rules)) - 1] += '\n' + hidden_term_line.format(phrase)
+            rule_choice = randint(1, len(rules))
+            rules[rule_choice - 1] += '\n' + hidden_term_line.format(phrase)
+            msg = "🗑 **Reset**: {} cleared {} messages in {}".format(ctx.message.author.mention, limit, ctx.message.channel.mention)
+            msg += "\n💬 __Current phrase__: **{}**, under rule {}".format(phrase, rule_choice)
+            await self.bot.send_message(self.bot.modlogs_channel, msg)
             # this should eventually generate messages to send, instead of sending it all at once which will be a problem when it goes above 2,000 characters
             await self.bot.say('\n\n'.join(rules))
             await self.bot.say(welcome_footer)
