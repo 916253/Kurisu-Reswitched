@@ -127,13 +127,11 @@ async def on_ready():
         # TODO: remove some of these roles that are useless on Reswitched. need to find their use around the bot first.
         # roles
         bot.staff_role = discord.utils.get(server.roles, name="mod")
-        bot.halfop_role = discord.utils.get(server.roles, name="HalfOP")
+        bot.halfop_role = discord.utils.get(server.roles, name="hop")
         bot.op_role = discord.utils.get(server.roles, name="OP")
         bot.superop_role = discord.utils.get(server.roles, name="moderator")
         bot.owner_role = discord.utils.get(server.roles, name="wizards")
         bot.helpers_role = discord.utils.get(server.roles, name="Helpers")
-        bot.onduty3ds_role = discord.utils.get(server.roles, name="On-Duty 3DS")
-        bot.ondutywiiu_role = discord.utils.get(server.roles, name="On-Duty Wii U")
         bot.verified_role = discord.utils.get(server.roles, name="Verified")
         bot.trusted_role = discord.utils.get(server.roles, name="Trusted")
         bot.probation_role = discord.utils.get(server.roles, name="Probation")
@@ -142,7 +140,10 @@ async def on_ready():
         bot.nohelp_role = discord.utils.get(server.roles, name="hackers")
         bot.noembed_role = discord.utils.get(server.roles, name="No-Embed")
         bot.elsewhere_role = discord.utils.get(server.roles, name="#elsewhere")
+
         bot.private_role = discord.utils.get(server.roles, name="private")
+        bot.hacker_role = discord.utils.get(server.roles, name="hacker")
+        bot.community_role = discord.utils.get(server.roles, name="community")
         bot.everyone_role = server.default_role
 
         bot.staff_ranks = {
@@ -150,11 +151,6 @@ async def on_ready():
             "OP": bot.op_role,
             "moderator": bot.superop_role,
             "Wizards": bot.owner_role,
-        }
-
-        bot.helper_roles = {
-            "3DS": bot.onduty3ds_role,
-            "WiiU": bot.ondutywiiu_role,
         }
 
         # load timebans

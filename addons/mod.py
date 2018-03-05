@@ -210,7 +210,6 @@ class Mod:
         except discord.errors.Forbidden:
             await self.bot.say("💢 I don't have permission to do this.")
 
-
     @commands.command(pass_context=True, name="secure")
     async def secure(self, ctx, user, *, reason=""):
         """Give access to the hacker role"""
@@ -242,6 +241,37 @@ class Mod:
             await self.bot.send_message(self.bot.modlogs_channel, msg)
         except discord.errors.Forbidden:
             await self.bot.say("💢 I don't have permission to do this.")
+
+    @commands.has_permissions(kick_members=True)
+    @commands.command(pass_context=True, name="approve")
+    async def approve(self, ctx, user):
+        """Approve a user, giving them the community role."""
+        try:
+            member = ctx.message.mentions[0]
+        except IndexError:
+            await self.bot.say("Please mention a user.")
+            return
+        await self.bot.add_roles(member, self.bot.community_role)
+        await self.bot.say("{} is now approved.".format(member.mention))
+        msg = "✅ **Approved**: {} approved {} | {}#{}".format(ctx.message.author.mention, member.mention, self.bot.escape_name(member.name), self.bot.escape_name(member.discriminator))
+        await self.bot.send_message(self.bot.modlogs_channel, msg)
+
+    @commands.command(pass_context=True, name="addhacker")
+    async def addhacker(self, ctx, user):
+        """Add the hacker role to a user."""
+        issuer = ctx.message.author
+        if (self.bot.private_role not in issuer.roles) and (self.bot.staff_role not in issuer.roles):
+            await self.bot.say("{} This command is limited to private and mod.".format(issuer.mention))
+            return
+        try:
+            member = ctx.message.mentions[0]
+        except IndexError:
+            await self.bot.say("Please mention a user.")
+            return
+        await self.bot.add_roles(member, self.bot.hacker_role)
+        await self.bot.say("{} is now a hacker.".format(member.mention))
+        msg = "💻 **Hacker**: {} added hacker to {} | {}#{}".format(issuer.mention, member.mention, self.bot.escape_name(member.name), self.bot.escape_name(member.discriminator))
+        await self.bot.send_message(self.bot.modlogs_channel, msg)
 
     @commands.has_permissions(kick_members=True)
     @commands.command(pass_context=True, name="probate")
@@ -281,8 +311,6 @@ class Mod:
             await self.bot.send_message(self.bot.modlogs_channel, msg)
         except discord.errors.Forbidden:
             await self.bot.say("💢 I don't have permission to do this.")
-
-
 
     @commands.has_permissions(ban_members=True)
     @commands.command(pass_context=True)
