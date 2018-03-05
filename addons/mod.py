@@ -63,15 +63,27 @@ welcome_footer = """
 :hash: __Channel Breakdown:__
 #news - Used exclusively for updates on ReSwitched progress and community information. Most major announcements are passed through this channel and whenever something is posted there it's usually something you'll want to look at.
 
-#general -  All things switch-hacking related. We try to keep this channel on-topic in that respect as much as possible, though it does drift a bit. If you have any questions about the state of switch hacking, how to get set up, etc, #general is the place to ask.
+#vvv-faq - Answers to most frequently asked questions on this server. You'll probably want to read through this.
 
-#off-topic - Channel for discussion of anything that doesn't belong in #general. Anything goes, so long as you make sure to follow the rules and be on your best behavior.
-
-#hack-n-all - Hacking discussion for things other than the switch that don't fit in the scope of #general, but need more structured discussion than #off-topic may be able to provide.
+#switch-hacking-meta - For meta-discussion related to hacking the Switch. Discussion about switch hacking that's not switch-hacking in and of itself
 
 #user-support - End-user focused support, mainly between users. Ask your questions about using switch homebrew here.
 
 #tool-support - Developer focused support. Ask your questions about using PegaSwitch, libtransistor, Mephisto, and other tools here.
+
+#hack-n-all - Hacking discussion for things other than the switch that don't fit in the scope of #general, but need more structured discussion than #off-topic may be able to provide.
+
+#exchange - For hunting switches. People selling switches on low firmwares, and discussion about where to find homebrewable switches should go there.
+
+#switch-hacking-general -  All things switch-hacking related. We try to keep this channel on-topic in that respect as much as possible, though it does drift a bit. If you have any questions about the state of switch hacking, how to get set up, etc, #general is the place to ask.
+
+#off-topic - Channel for discussion of anything that doesn't belong in #general. Anything goes, so long as you make sure to follow the rules and be on your best behavior.
+
+#toolchain-development - Discussion about the development of libtransistor itself goes there.
+
+#homebrew-development - Discussion about the development of homebrew goes there. Feel free to show off your latest creation here.
+
+#cfw-development - Discussion about the development of Custom Firmwares, such as Atmosphere-NX, goes in there.
 
 **When you have read everything, send a message in this channel to ask us to give you access to the other channels. Have a nice day!** \n **Note: We know if you haven't read everything.  We will kick the first time, ban the second.**
 """
