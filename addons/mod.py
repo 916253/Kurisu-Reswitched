@@ -244,16 +244,15 @@ class Mod:
 
     @commands.has_permissions(kick_members=True)
     @commands.command(pass_context=True, name="approve")
-    async def approve(self, ctx, user):
+    async def approve(self, ctx, *users):
         """Approve a user, giving them the community role."""
-        try:
-            member = ctx.message.mentions[0]
-        except IndexError:
-            await self.bot.say("Please mention a user.")
-            return
-        await self.bot.add_roles(member, self.bot.community_role)
-        await self.bot.say("{} is now approved.".format(member.mention))
-        msg = "✅ **Approved**: {} approved {} | {}#{}".format(ctx.message.author.mention, member.mention, self.bot.escape_name(member.name), self.bot.escape_name(member.discriminator))
+        members = []
+        for member in ctx.message.mentions:
+            await self.bot.add_roles(member, self.bot.community_role)
+            members.append(member.mention)
+        await self.bot.say("Approved {} member(s).".format(len(members)))
+        msg = "✅ **Approved**: {} approved {} members\n".format(ctx.message.author.mention, len(members))
+        msg += ', '.join(members)
         await self.bot.send_message(self.bot.modlogs_channel, msg)
 
     @commands.command(pass_context=True, name="addhacker")
