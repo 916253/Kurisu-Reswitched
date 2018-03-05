@@ -255,6 +255,19 @@ class Mod:
         msg += ', '.join(members)
         await self.bot.send_message(self.bot.modlogs_channel, msg)
 
+    @commands.has_permissions(kick_members=True)
+    @commands.command(pass_context=True, name="revoke")
+    async def revoke(self, ctx, *users):
+        """Un-approve a user, removing the community role."""
+        members = []
+        for member in ctx.message.mentions:
+            await self.bot.remove_roles(member, self.bot.community_role)
+            members.append(member.mention)
+        await self.bot.say("Un-approved {} member(s).".format(len(members)))
+        msg = "❌ **Un-approved**: {} approved {} members\n".format(ctx.message.author.mention, len(members))
+        msg += ', '.join(members)
+        await self.bot.send_message(self.bot.modlogs_channel, msg)
+
     @commands.command(pass_context=True, name="addhacker")
     async def addhacker(self, ctx, user):
         """Add the hacker role to a user."""
