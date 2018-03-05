@@ -12,14 +12,11 @@ class ModWarn:
         self.bot = bot
         print('Addon "{}" loaded'.format(self.__class__.__name__))
 
+    @commands.has_permissions(kick_members=True)
     @commands.command(pass_context=True)
     async def warn(self, ctx, user, *, reason=""):
         """Warn a user. Staff only."""
         issuer = ctx.message.author
-        if self.bot.staff_role not in issuer.roles:
-            msg = "{0} This command is limited to Staff.".format(issuer.mention)
-            await self.bot.say(msg)
-            return
         try:
             member = ctx.message.mentions[0]
         except IndexError:
@@ -68,7 +65,7 @@ class ModWarn:
             msg += "\n✏️ __Reason__: " + reason
         await self.bot.send_message(self.bot.modlogs_channel, msg + ("\nPlease add an explanation below. In the future, it is recommended to use `.warn <user> [reason]` as the reason is automatically sent to the user." if reason == "" else ""))
 
-    @commands.has_permissions(ban_members=True)
+    @commands.has_permissions(kick_members=True)
     @commands.command(pass_context=True)
     async def listwarns(self, ctx, user):
         """List warns for a user. Staff only."""
@@ -93,7 +90,7 @@ class ModWarn:
             embed.color = discord.Color.green()
         await self.bot.say("", embed=embed)
 
-    @commands.has_permissions(ban_members=True)
+    @commands.has_permissions(kick_members=True)
     @commands.command(pass_context=True)
     async def listwarnsid(self, ctx, user_id):
         """List warns for a user based on ID. Staff only."""
@@ -115,7 +112,7 @@ class ModWarn:
             embed.color = discord.Color.green()
         await self.bot.say("", embed=embed)
 
-    @commands.has_permissions(ban_members=True)
+    @commands.has_permissions(kick_members=True)
     @commands.command(pass_context=True)
     async def delwarn(self, ctx, user, idx: int):
         """Remove a specific warn from a user. Staff only."""
@@ -149,7 +146,7 @@ class ModWarn:
         msg = "🗑 **Deleted warn**: {} removed warn {} from {} | {}#{}".format(ctx.message.author.mention, idx, member.mention, member.name, member.discriminator)
         await self.bot.send_message(self.bot.modlogs_channel, msg, embed=embed)
 
-    @commands.has_permissions(ban_members=True)
+    @commands.has_permissions(kick_members=True)
     @commands.command(pass_context=True)
     async def delwarnid(self, ctx, user_id, idx: int):
         """Remove a specific warn from a user based on ID. Staff only."""
