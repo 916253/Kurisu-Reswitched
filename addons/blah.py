@@ -19,7 +19,7 @@ class Blah:
     @commands.command(hidden=True, pass_context=True)
     async def speak(self, ctx, channel_destination: str, *, inp):
         channel = ctx.message.channel_mentions[0]
-        await self.bot.send_message(channel, inp)
+        await self.bot.send_message(channel, inp.replace('@everyone', '@\u200beveryone').replace('@here', '@\u200bhere'))
 
     @commands.has_permissions(ban_members=True)
     @commands.command(hidden=True, pass_context=True)
