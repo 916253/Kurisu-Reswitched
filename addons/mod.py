@@ -43,7 +43,7 @@ welcome_rules = (
     # 5
     """
     "Don't spam.
-     • For excessively long text, use a service like https://0bin.net/.
+     • For excessively long text, use a service like <https://0bin.net/>.
     """,
 
     # 6
