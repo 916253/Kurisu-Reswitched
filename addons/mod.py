@@ -73,7 +73,7 @@ welcome_footer = """
 
 #tool-support - Developer focused support. Ask your questions about using PegaSwitch, libtransistor, Mephisto, and other tools here.
 
-**When you have read everything, send a message in this channel to ask us to give you access to the other channels. Have a nice day!** \n **Note: We know if you haven't read everything.  We will kick the first time, ban the second.**
+**When you have read everything, send a message in this channel to ask us to give you access to the other channels. Have a nice day!** \n**Note: We know if you haven't read everything.  We will kick the first time, ban the second.**
 """
 
 hidden_term_line = ' • When you are asking us to give you access to the other channels, please include "{}" in your message. Failure to do so may result in being kicked out.'
