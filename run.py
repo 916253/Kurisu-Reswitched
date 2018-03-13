@@ -116,7 +116,7 @@ async def on_ready():
         bot.config = config
 
         # channels
-        bot.welcome_channel = discord.utils.get(server.channels, name="welcome-and-rules")
+        bot.welcome_channel = discord.utils.get(server.channels, name="newcomers")
         bot.announcements_channel = discord.utils.get(server.channels, name="news")
         bot.helpers_channel = discord.utils.get(server.channels, name="general")
         bot.mods_channel = discord.utils.get(server.channels, name="server-logs")
