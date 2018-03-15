@@ -169,7 +169,7 @@ class Mod:
     @commands.command(pass_context=True, name="reset")
     async def reset(self, ctx, limit: int = 100, force: str = ""):
         """Wipes messages in #newcomers and pastes the welcome message again. Staff only."""
-        if(ctx.message.channel != self.bot.welcome_channel and force != "force"):
+        if ctx.message.channel != self.bot.welcome_channel and force != "force":
             await self.bot.say("This command is limited to <#{}>".format(self.bot.welcome_channel.id))
             return
 
