@@ -13,10 +13,10 @@ class Lockdown:
 
     @commands.has_permissions(manage_messages=True)
     @commands.command(pass_context=True, name="lock")
-    async def lock(self, ctx, arg=""):
+    async def lock(self, ctx):
         """Lock message sending in the channel. Staff only."""
         try:
-            if arg in {'community', 'cm'}:
+            if ctx.message.channel in self.bot.community_channels:
                 role = self.bot.community_role
             else:
                 role = self.bot.everyone_role
@@ -39,7 +39,7 @@ class Lockdown:
     async def softlock(self, ctx):
         """Lock message sending in the channel, without the "disciplinary action" note. Staff only."""
         try:
-            if arg in {'community', 'cm'}:
+            if ctx.message.channel in self.bot.community_channels:
                 role = self.bot.community_role
             else:
                 role = self.bot.everyone_role
@@ -58,10 +58,10 @@ class Lockdown:
 
     @commands.has_permissions(manage_messages=True)
     @commands.command(pass_context=True, name="unlock")
-    async def unlock(self, ctx, arg=""):
+    async def unlock(self, ctx):
         """Unlock message sending in the channel. Staff only."""
         try:
-            if arg == 'community':
+            if ctx.message.channel in self.bot.community_channels:
                 role = self.bot.community_role
             else:
                 role = self.bot.everyone_role

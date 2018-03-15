@@ -124,6 +124,12 @@ async def on_ready():
         bot.serverlogs_channel = discord.utils.get(server.channels, name="server-logs")
         bot.messagelogs_channel = discord.utils.get(server.channels, name="server-logs")
 
+        bot.community_channels = (
+            discord.utils.get(server.channels, name="switch-hacking-general"),
+            discord.utils.get(server.channels, name="homebrew-development"),
+            discord.utils.get(server.channels, name="off-topic"),
+        )
+
         # TODO: remove some of these roles that are useless on Reswitched. need to find their use around the bot first.
         # roles
         bot.staff_role = discord.utils.get(server.roles, name="mod")
