@@ -124,12 +124,10 @@ async def on_ready():
         bot.serverlogs_channel = discord.utils.get(server.channels, name="server-logs")
         bot.messagelogs_channel = discord.utils.get(server.channels, name="server-logs")
 
-        # this is here until the new robocop is finished with new discord.py which supports categories.
         bot.community_channels = (
             discord.utils.get(server.channels, name="switch-hacking-general"),
             discord.utils.get(server.channels, name="homebrew-development"),
             discord.utils.get(server.channels, name="off-topic"),
-            discord.utils.get(server.channels, name="temp-atmosphere-logo"),
         )
 
         # TODO: remove some of these roles that are useless on Reswitched. need to find their use around the bot first.
