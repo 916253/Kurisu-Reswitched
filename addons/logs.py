@@ -2,6 +2,7 @@ import discord
 import json
 from discord.ext import commands
 from sys import argv
+from datetime import datetime, timedelta
 
 class Logs:
     """
@@ -13,6 +14,22 @@ class Logs:
 
     async def on_member_join(self, member):
         await self.bot.wait_until_all_ready()
+        age = datetime.now() - member.created_at
+        if age < timedelta(minutes=15):
+            try:
+                await self.bot.send_message(member, "Your account is too new to join ReSwitched. Please try again later.")
+                sent = True
+            except discord.errors.Forbidden:
+                sent = False
+            self.bot.actions.append("uk:"+member.id)
+            await self.bot.kick(member)
+            msg = "🚨 **Account too new**: {} age: {} | {}#{}\n🗓 __Creation__: {}\n🏷 __User ID__: {}".format(
+                member.mention, age, self.bot.escape_name(member.name), member.discriminator, member.created_at, member.id
+            )
+            if not sent:
+                msg += "\nThe user has disabled direct messages, so the reason was not sent."
+            await self.bot.send_message(self.bot.serverlogs_channel, msg)
+            return
         msg = "✅ **Join**: {} | {}#{}\n🗓 __Creation__: {}\n🏷 __User ID__: {}".format(
             member.mention, self.bot.escape_name(member.name), member.discriminator, member.created_at, member.id
         )
