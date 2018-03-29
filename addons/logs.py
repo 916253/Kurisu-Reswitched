@@ -24,7 +24,7 @@ class Logs:
             self.bot.actions.append("uk:"+member.id)
             await self.bot.kick(member)
             msg = "🚨 **Account too new**: {} | {}#{}\n🗓 __Creation__: {}\n🕓 Account age: {}\n🏷 __User ID__: {}".format(
-                member.mention, age, self.bot.escape_name(member.name), member.discriminator, member.created_at, age, member.id
+                member.mention, self.bot.escape_name(member.name), member.discriminator, member.created_at, age, member.id
             )
             if not sent:
                 msg += "\nThe user has disabled direct messages, so the reason was not sent."
