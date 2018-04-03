@@ -26,7 +26,7 @@ class Lockdown:
                 return
             overwrites.send_messages = False
             overwrites.add_reactions = False
-            await asyncio.gather(self.bot.edit_channel_permissions(ctx.message.channel, role, overwrites) for role in roles)
+            await asyncio.gather(*(self.bot.edit_channel_permissions(ctx.message.channel, role, overwrites) for role in roles))
             await self.bot.say("🔒 Channel locked down. Only staff members may speak. Do not bring the topic to other channels or risk disciplinary actions.")
             msg = "🔒 **Lockdown**: {0} by {1} | {2}#{3}".format(ctx.message.channel.mention, ctx.message.author.mention, ctx.message.author.name, ctx.message.author.discriminator)
             await self.bot.send_message(self.bot.modlogs_channel, msg)
@@ -49,7 +49,7 @@ class Lockdown:
                 return
             overwrites.send_messages = False
             overwrites.add_reactions = False
-            await asyncio.gather(self.bot.edit_channel_permissions(ctx.message.channel, role, overwrites) for role in roles)
+            await asyncio.gather(*(self.bot.edit_channel_permissions(ctx.message.channel, role, overwrites) for role in roles))
             await self.bot.say("🔒 Channel locked.")
             msg = "🔒 **Soft-lock**: {0} by {1} | {2}#{3}".format(ctx.message.channel.mention, ctx.message.author.mention, ctx.message.author.name, ctx.message.author.discriminator)
             await self.bot.send_message(self.bot.modlogs_channel, msg)
@@ -71,7 +71,7 @@ class Lockdown:
                 return
             overwrites.send_messages = True
             overwrites.add_reactions = True
-            await asyncio.gather(self.bot.edit_channel_permissions(ctx.message.channel, role, overwrites) for role in roles)
+            await asyncio.gather(*(self.bot.edit_channel_permissions(ctx.message.channel, role, overwrites) for role in roles))
             await self.bot.say("🔓 Channel unlocked.")
             msg = "🔓 **Unlock**: {0} by {1} | {2}#{3}".format(ctx.message.channel.mention, ctx.message.author.mention, ctx.message.author.name, ctx.message.author.discriminator)
             await self.bot.send_message(self.bot.modlogs_channel, msg)
