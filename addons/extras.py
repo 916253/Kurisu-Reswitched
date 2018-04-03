@@ -55,7 +55,7 @@ class Extras:
         curr = datetime.datetime.now()
         diff = datetime.timedelta(seconds=seconds)
         # http://stackoverflow.com/questions/2119472/convert-a-timedelta-to-days-hours-and-minutes
-        days, hours, minutes = td.days, td.seconds//3600, (td.seconds//60)%60
+        # days, hours, minutes = td.days, td.seconds//3600, (td.seconds//60)%60
         msg = "```\ncurr: {}\nnew:  {}\ndiff: {}\n```".format(
             curr,
             curr + diff,
