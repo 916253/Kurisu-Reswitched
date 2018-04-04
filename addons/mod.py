@@ -176,8 +176,9 @@ class Mod:
         try:
             await self.bot.purge_from(ctx.message.channel, limit=limit)
 
-            index = time.localtime().tm_hour % 12
-            phrase = self.bot.config['Probate']['Phrases'].split(',')[index].strip()
+            probate_phrases = self.bot.config['Probate']['Phrases'].split(',')
+            index = randint(1, len(probate_phrases))
+            phrase = probate_phrases[index].strip()
 
             await self.bot.say(welcome_header)
             rules = ['**{}**. {}'.format(i, cleandoc(r)) for i, r in enumerate(welcome_rules, 1)]
