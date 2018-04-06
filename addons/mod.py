@@ -2,7 +2,7 @@ import discord
 import json
 import re
 from inspect import cleandoc
-from random import randint
+from random import randint, choice
 from discord.ext import commands
 from subprocess import call
 from sys import argv
@@ -177,8 +177,7 @@ class Mod:
             await self.bot.purge_from(ctx.message.channel, limit=limit)
 
             probate_phrases = self.bot.config['Probate']['Phrases'].split(',')
-            index = randint(1, len(probate_phrases))
-            phrase = probate_phrases[index].strip()
+            phrase = choice(probate_phrases).strip()
 
             await self.bot.say(welcome_header)
             rules = ['**{}**. {}'.format(i, cleandoc(r)) for i, r in enumerate(welcome_rules, 1)]
