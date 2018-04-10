@@ -141,6 +141,7 @@ async def on_ready():
         bot.verified_role = discord.utils.get(server.roles, name="Verified")
         bot.trusted_role = discord.utils.get(server.roles, name="Trusted")
         bot.probation_role = discord.utils.get(server.roles, name="Probation")
+        bot.unprobated_role = discord.utils.get(server.roles, name="Unprobated")
         bot.muted_role = discord.utils.get(server.roles, name="Muted")
         bot.nomemes_role = discord.utils.get(server.roles, name="No-Memes")
         bot.nohelp_role = discord.utils.get(server.roles, name="hackers")
