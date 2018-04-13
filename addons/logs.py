@@ -121,7 +121,7 @@ class Logs:
                 if role not in member_before.roles:
                     role_addition.append(role)
 
-            if len(role_addition) != 0 and len(role_removal) != 0:
+            if len(role_addition) != 0 or len(role_removal) != 0:
                 msg = "\n👑 __Role change__: "
                 roles = []
                 for role in role_removal:
