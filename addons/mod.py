@@ -258,8 +258,7 @@ class Mod:
             return
         try:
             member = ctx.message.mentions[0]
-            await self.bot.add_roles(member, self.bot.unprobated_role)
-            await self.bot.remove_roles(member, self.bot.probation_role)
+            await self.bot.replace_roles(member, *([role for role in member.roles if role != self.bot.probation_role] + [self.bot.unprobated_role]))
             msg = "🚫 **Unprobated**: {} unprobated {} | {}#{}".format(ctx.message.author.mention, member.mention, self.bot.escape_name(member.name), self.bot.escape_name(member.discriminator))
             await self.bot.send_message(self.bot.modlogs_channel, msg)
         except discord.errors.Forbidden:
@@ -315,8 +314,7 @@ class Mod:
         try:
             member = ctx.message.mentions[0]
             await self.add_restriction(member, "Probation")
-            await self.bot.add_roles(member, self.bot.probation_role)
-            await self.bot.remove_roles(member, self.bot.unprobated_role)
+            await self.bot.replace_roles(member, *([role for role in member.roles if role != self.bot.unprobated_role] + [self.bot.probation_role]))
             msg_user = "You are under probation!"
             if reason != "":
                 msg_user += " The given reason is: " + reason
@@ -341,8 +339,7 @@ class Mod:
         try:
             member = ctx.message.mentions[0]
             await self.remove_restriction(member, "Probation")
-            await self.bot.remove_roles(member, self.bot.probation_role)
-            await self.bot.add_roles(member, self.bot.unprobated_role)
+            await self.bot.replace_roles(member, *([role for role in member.roles if role != self.bot.probation_role] + [self.bot.unprobated_role]))
             await self.bot.say("{} is out of probation.".format(member.mention))
             msg = "⭕️ **Un-probated**: {} un-probated {} | {}#{}".format(ctx.message.author.mention, member.mention, self.bot.escape_name(member.name), self.bot.escape_name(member.discriminator))
             await self.bot.send_message(self.bot.modlogs_channel, msg)
