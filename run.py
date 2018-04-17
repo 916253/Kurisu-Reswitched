@@ -128,6 +128,7 @@ async def on_ready():
             discord.utils.get(server.channels, name="switch-hacking-general"),
             discord.utils.get(server.channels, name="homebrew-development"),
             discord.utils.get(server.channels, name="off-topic"),
+            discord.utils.get(server.channels, name="creative-content")
         )
 
         # TODO: remove some of these roles that are useless on Reswitched. need to find their use around the bot first.
