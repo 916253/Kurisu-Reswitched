@@ -20,7 +20,7 @@ class Extras:
     @commands.command()
     async def robocop(self):
         """About the bot"""
-        embed = discord.Embed(title="Robocop", color=discord.Color.green())
+        embed = discord.Embed(title="Robocop", color=discord.Color.green(), url="https://github.com/916253/Kurisu-Reswitched")
         embed.set_author(name="")
         embed.set_thumbnail(url="http://i.imgur.com/0iDmGQa.png")
         embed.description = "Based off of Kurisu by 916253 and ihaveamac"
