@@ -141,7 +141,6 @@ async def on_ready():
         bot.helpers_role = discord.utils.get(server.roles, name="Helpers")
         bot.verified_role = discord.utils.get(server.roles, name="Verified")
         bot.trusted_role = discord.utils.get(server.roles, name="Trusted")
-        bot.probation_role = discord.utils.get(server.roles, name="Probation")
         bot.unprobated_role = discord.utils.get(server.roles, name="participant")
         bot.muted_role = discord.utils.get(server.roles, name="Muted")
         bot.nomemes_role = discord.utils.get(server.roles, name="No-Memes")
@@ -204,9 +203,7 @@ addons = [
     'addons.mod',
     'addons.links',
     'addons.err',
-    'addons.auto_probation',
     'addons.nxerr',
-    'addons.temporary_auto_unprobation',
     'addons.things',
     'addons.mod_warn',
 ]
