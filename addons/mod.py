@@ -102,6 +102,7 @@ class Mod:
     """
     def __init__(self, bot):
         self.bot = bot
+        self.bot.current_phrase = None
         print('Addon "{}" loaded'.format(self.__class__.__name__))
 
     async def add_restriction(self, member, rst):
@@ -168,30 +169,34 @@ class Mod:
     @commands.has_permissions(kick_members=True)
     @commands.command(pass_context=True, name="reset")
     async def reset(self, ctx, limit: int = 100, force: str = ""):
-        """Wipes messages in #newcomers and pastes the welcome message again. Staff only."""
         if ctx.message.channel != self.bot.welcome_channel and force != "force":
             await self.bot.say("This command is limited to <#{}>".format(self.bot.welcome_channel.id))
             return
 
+        await self.reset_internal(ctx.message.channel, limit, ctx.message.author.mention)
+
+    async def reset_internal(self, channel, limit: int = 100, author: str = ""):
+        """Wipes messages in #newcomers and pastes the welcome message again. Staff only."""
         try:
-            await self.bot.purge_from(ctx.message.channel, limit=limit)
+            await self.bot.purge_from(channel, limit=limit)
 
             probate_phrases = self.bot.config['Probate']['Phrases'].split(',')
             phrase = choice(probate_phrases).strip()
 
-            await self.bot.say(welcome_header)
+            await self.bot.send_message(channel, welcome_header)
             rules = ['**{}**. {}'.format(i, cleandoc(r)) for i, r in enumerate(welcome_rules, 1)]
             rule_choice = randint(1, len(rules))
             rules[rule_choice - 1] += '\n' + hidden_term_line.format(phrase)
-            msg = "🗑 **Reset**: {} cleared {} messages in {}".format(ctx.message.author.mention, limit, ctx.message.channel.mention)
+            self.bot.current_phrase = phrase
+            msg = "🗑 **Reset**: {} cleared {} messages in {}".format(author, limit, channel.mention)
             msg += "\n💬 __Current phrase__: **{}**, under rule {}".format(phrase, rule_choice)
             await self.bot.send_message(self.bot.modlogs_channel, msg)
             # this should eventually generate messages to send, instead of sending it all at once which will be a problem when it goes above 2,000 characters
-            await self.bot.say('\n\n'.join(rules))
+            await self.bot.send_message(channel, '\n\n'.join(rules))
             for x in welcome_footer:
-                await self.bot.say(cleandoc(x))
+                await self.bot.send_message(channel, cleandoc(x))
         except discord.errors.Forbidden:
-            await self.bot.say("💢 I don't have permission to do this.")
+            await self.bot.send_message(channel, "💢 I don't have permission to do this.")
 
     @commands.has_permissions(manage_nicknames=True)
     @commands.command(pass_context=True, name="mute")
@@ -382,5 +387,15 @@ class Mod:
         except discord.errors.Forbidden:
             await self.bot.say("💢 I don't have permission to do this.")
 
+    async def on_message(self, message):
+        try:
+            if self.bot.current_phrase is not None and self.bot.unprobated_role not in message.author.roles and message.channel == self.bot.welcome_channel and self.bot.current_phrase in message.content:
+                # Auto unprobate
+                member = message.author
+                await self.remove_restriction(member, "Probation")
+                await self.bot.replace_roles(member, *([role for role in member.roles if role != self.bot.probation_role] + [self.bot.unprobated_role]))
+                await self.reset_internal(message.channel)
+        except discord.errors.Forbidden:
+            await self.bot.send_message(message.channel, "💢 I don't have permission to do this.")
 def setup(bot):
     bot.add_cog(Mod(bot))
