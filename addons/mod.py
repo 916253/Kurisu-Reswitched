@@ -186,8 +186,25 @@ class Mod:
             msg = "🗑 **Reset**: {} cleared {} messages in {}".format(ctx.message.author.mention, limit, ctx.message.channel.mention)
             msg += "\n💬 __Current phrase__: **{}**, under rule {}".format(phrase, rule_choice)
             await self.bot.send_message(self.bot.modlogs_channel, msg)
-            # this should eventually generate messages to send, instead of sending it all at once which will be a problem when it goes above 2,000 characters
-            await self.bot.say('\n\n'.join(rules))
+
+            # find rule that puts us over 2,000 characters, if any
+            total = 0
+            messages = []
+            current_message = ""
+            for item in rules:
+                total += len(item) + 2 # \n\n
+                if total < 2000:
+                    current_message += item + '\n\n'
+                else:
+                    # we've hit the limit; split!
+                    messages += [current_message]
+                    current_message = item
+                    total = 0
+            messages += [current_message + '\n\n']
+
+            for item in messages:
+                await self.bot.say(item)
+
             for x in welcome_footer:
                 await self.bot.say(cleandoc(x))
         except discord.errors.Forbidden:
