@@ -59,7 +59,7 @@ welcome_rules = (
     'Absolutely no piracy. There is a zero-tolerance policy and we will enforce this strictly and swiftly.',
     
     # 10
-    'The first character of your server nickname should be alphanumeric.'
+    'The first character of your server nickname should be alphanumeric if you wish to talk in chat.'
 )
 
 welcome_footer = (
