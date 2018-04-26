@@ -118,11 +118,9 @@ async def on_ready():
         # channels
         bot.welcome_channel = discord.utils.get(server.channels, name="newcomers")
         bot.announcements_channel = discord.utils.get(server.channels, name="news")
-        bot.helpers_channel = discord.utils.get(server.channels, name="general")
         bot.mods_channel = discord.utils.get(server.channels, name="server-logs")
         bot.modlogs_channel = discord.utils.get(server.channels, name="server-logs")
         bot.serverlogs_channel = discord.utils.get(server.channels, name="server-logs")
-        bot.messagelogs_channel = discord.utils.get(server.channels, name="server-logs")
 
         bot.community_channels = (
             discord.utils.get(server.channels, name="switch-hacking-general"),
@@ -139,15 +137,12 @@ async def on_ready():
         bot.op_role = discord.utils.get(server.roles, name="OP")
         bot.superop_role = discord.utils.get(server.roles, name="moderator")
         bot.owner_role = discord.utils.get(server.roles, name="wizards")
-        bot.helpers_role = discord.utils.get(server.roles, name="Helpers")
-        bot.verified_role = discord.utils.get(server.roles, name="Verified")
-        bot.trusted_role = discord.utils.get(server.roles, name="Trusted")
         bot.unprobated_role = discord.utils.get(server.roles, name="participant")
         bot.muted_role = discord.utils.get(server.roles, name="Muted")
-        bot.nomemes_role = discord.utils.get(server.roles, name="No-Memes")
         bot.nohelp_role = discord.utils.get(server.roles, name="hackers")
+        bot.nomemes_role = discord.utils.get(server.roles, name="No-Memes")
         bot.noembed_role = discord.utils.get(server.roles, name="No-Embed")
-        bot.elsewhere_role = discord.utils.get(server.roles, name="#elsewhere")
+        bot.team_role = discord.utils.get(server.roles, name="team")
 
         bot.private_role = discord.utils.get(server.roles, name="private")
         bot.hacker_role = discord.utils.get(server.roles, name="hacker")
