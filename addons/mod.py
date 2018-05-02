@@ -138,8 +138,8 @@ class Mod:
     async def pull(self, ctx):
         """Pull new changes from GitHub and restart."""
         issuer = ctx.message.author
-        if (self.bot.private_role not in issuer.roles) and (self.bot.owner_role not in issuer.roles):
-            msg = "{} This command is limited to private and wizards.".format(issuer.mention)
+        if (self.bot.owner_role not in issuer.roles):
+            msg = "{} This command is limited to wizards.".format(issuer.mention)
             await self.bot.say(msg)
             return
         await self.bot.say("Pulling changes...")
