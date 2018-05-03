@@ -356,11 +356,11 @@ class Mod:
     async def unprobate(self, ctx, user):
         """Unprobate a user. Staff only."""
         try:
-            member = ctx.message.mentions[0]
-            await self.bot.add_roles(member, self.bot.unprobated_role)
-            await self.bot.say("{} is out of probation.".format(member.mention))
-            msg = "⭕️ **Un-probated**: {} un-probated {} | {}#{}".format(ctx.message.author.mention, member.mention, self.bot.escape_name(member.name), self.bot.escape_name(member.discriminator))
-            await self.bot.send_message(self.bot.modlogs_channel, msg)
+            for member in ctx.message.mentions:
+                await self.bot.add_roles(member, self.bot.unprobated_role)
+                await self.bot.say("{} is out of probation.".format(member.mention))
+                msg = "⭕️ **Un-probated**: {} un-probated {} | {}#{}".format(ctx.message.author.mention, member.mention, self.bot.escape_name(member.name), self.bot.escape_name(member.discriminator))
+                await self.bot.send_message(self.bot.modlogs_channel, msg)
         except discord.errors.Forbidden:
             await self.bot.say("💢 I don't have permission to do this.")
 
