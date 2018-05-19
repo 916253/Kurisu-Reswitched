@@ -91,8 +91,9 @@ welcome_footer = (
 
     #cfw-development - Development discussion regarding custom firmware (CFW) projects, such as Atmosphère. This channel is meant for the discussion accompanying active development.
 
-    **When you have read everything, send a message in this channel to ask us to give you access to the other channels. Have a nice day!**
-    **Note: We know if you haven't read everything.  We will kick the first time, ban the second.**
+    **If you are still not sure how to get access to the other channels, please read the rules again.**
+    **If you have questions about the rules, feel free to ask here!**
+    **Note: We know if you have read the rules or not. If you falsely claim to read the rules, we will kick the first time and ban the second.**
     """,
 )
 
