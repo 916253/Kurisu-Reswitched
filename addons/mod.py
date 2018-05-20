@@ -93,6 +93,7 @@ welcome_footer = (
 
     **If you are still not sure how to get access to the other channels, please read the rules again.**
     **If you have questions about the rules, feel free to ask here!**
+
     **Note: We know if you have read the rules or not. If you falsely claim to read the rules, we will kick the first time and ban the second.**
     """,
 )
