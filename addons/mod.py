@@ -199,13 +199,13 @@ class Mod:
             for item in rules:
                 total += len(item) + 2 # \n\n
                 if total < 2000:
-                    current_message += item + '\n\n'
+                    current_message += item + u"\n\n"
                 else:
                     # we've hit the limit; split!
                     messages += [current_message]
-                    current_message = item
+                    current_message = u"\u200B\n" + item + u"\n\u200B"
                     total = 0
-            messages += [current_message + '\n\n']
+            messages += [current_message]
 
             for item in messages:
                 await self.bot.say(item)
