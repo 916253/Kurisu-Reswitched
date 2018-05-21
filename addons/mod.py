@@ -98,7 +98,7 @@ welcome_footer = (
     """,
 )
 
-hidden_term_line = ' • When you are asking us to give you access to the other channels, please include "{}" in your message. Failure to do so may result in being kicked out.'
+hidden_term_line = ' • When you have finished reading all of the rules, send a message in this channel that includes the phrase "{}", and we\'ll grant you access to the other channels. Failure to do so may result in being kicked out.'
 
 
 class Mod:
