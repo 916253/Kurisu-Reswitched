@@ -149,7 +149,7 @@ class Mod:
         await self.bot.say("👋 Restarting bot!")
         await self.bot.close()
 
-    @commands.has_permissions(ban_members=True)
+    @commands.has_permissions(kick_members=True)
     @commands.command(pass_context=True, hidden=True)
     async def userinfo(self, ctx, user):
         """Gets user info. SuperOP+."""
