@@ -199,11 +199,11 @@ class Mod:
             for item in rules:
                 total += len(item) + 2 # \n\n
                 if total < 2000:
-                    current_message += item + u"\n\n"
+                    current_message += item + "\n\n"
                 else:
                     # we've hit the limit; split!
                     messages += [current_message]
-                    current_message = u"\u200B\n" + item + u"\n\u200B"
+                    current_message = "\n\u200B\n" + item + "\n\u200B\n"
                     total = 0
             messages += [current_message]
 
