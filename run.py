@@ -202,6 +202,7 @@ addons = [
     'addons.nxerr',
     'addons.things',
     'addons.mod_warn',
+    'addons.probation_bot'
 ]
 
 failed_addons = []
