@@ -52,10 +52,6 @@ class KickBan:
             except IndexError:
                 await self.bot.say("Please mention a user.")
                 return
-            if self.bot.halfop_role in issuer.roles:
-                if self.bot.unprobated_role in member.roles:
-                    await self.bot.say("{} You can only use this on members in probation.".format(issuer.mention))
-                    return
             msg = "You were banned from {}.".format(self.bot.server.name)
             if reason != "":
                 msg += " The given reason is: " + reason

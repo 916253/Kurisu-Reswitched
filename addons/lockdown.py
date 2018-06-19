@@ -17,9 +17,9 @@ class Lockdown:
         """Lock message sending in the channel. Staff only."""
         try:
             if ctx.message.channel in self.bot.community_channels:
-                roles = (self.bot.community_role, self.bot.hacker_role, self.bot.halfop_role, self.bot.team_role)
+                roles = (self.bot.community_role, self.bot.hacker_role, self.bot.team_role)
             else:
-                roles = (self.bot.unprobated_role,self.bot.halfop_role, self.bot.team_role)
+                roles = (self.bot.unprobated_role, self.bot.team_role)
             overwrites = ctx.message.channel.overwrites_for(roles[0])
             if overwrites.send_messages is False:
                 await self.bot.say("🔒 Channel is already locked down. Use `.unlock [community]` to unlock.")
@@ -40,9 +40,9 @@ class Lockdown:
         """Lock message sending in the channel, without the "disciplinary action" note. Staff only."""
         try:
             if ctx.message.channel in self.bot.community_channels:
-                roles = (self.bot.community_role, self.bot.hacker_role, self.bot.halfop_role, self.bot.team_role)
+                roles = (self.bot.community_role, self.bot.hacker_role, self.bot.team_role)
             else:
-                roles = (self.bot.unprobated_role,self.bot.halfop_role, self.bot.team_role)
+                roles = (self.bot.unprobated_role, self.bot.team_role)
             overwrites = ctx.message.channel.overwrites_for(roles[0])
             if overwrites.send_messages is False:
                 await self.bot.say("🔒 Channel is already locked down. Use `.unlock [community]` to unlock.")
@@ -62,9 +62,9 @@ class Lockdown:
         """Unlock message sending in the channel. Staff only."""
         try:
             if ctx.message.channel in self.bot.community_channels:
-                roles = (self.bot.community_role, self.bot.hacker_role, self.bot.halfop_role, self.bot.team_role)
+                roles = (self.bot.community_role, self.bot.hacker_role, self.bot.team_role)
             else:
-                roles = (self.bot.unprobated_role, self.bot.halfop_role, self.bot.team_role)
+                roles = (self.bot.unprobated_role, self.bot.team_role)
             overwrites = ctx.message.channel.overwrites_for(roles[0])
             if overwrites.send_messages is True:
                 await self.bot.say("🔓 Channel is already unlocked.")
