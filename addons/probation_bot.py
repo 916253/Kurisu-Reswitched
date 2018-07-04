@@ -14,7 +14,10 @@ class ProbationBot:
             if message.channel == self.bot.welcome_channel:
                 member = message.author
                 full_name = member.name + '#' + member.discriminator
-                if hashlib.sha1(full_name.encode('utf-8')).hexdigest() in message.content:
+                full_name_hex = hashlib.sha1(full_name.encode('utf-8')).hexdigest()
+                # For those people using a shell and forgetting to use echo -n
+                full_name_endl_hex = hashlib.sha1((full_name + '\n').encode('utf-8')).hexdigest()
+                if full_name_hex in message.content or full_name_endl_hex in message.content:
                     # Auto unprobate
                     await self.bot.add_roles(member, self.bot.unprobated_role)
                     await self.bot.delete_message(message)

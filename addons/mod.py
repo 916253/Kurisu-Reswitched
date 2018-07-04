@@ -98,7 +98,7 @@ welcome_footer = (
     """,
 )
 
-hidden_term_line = ' • When you have finished reading all of the rules, send a message in this channel that includes the sha1 of your discord `name#discriminator`, and we\'ll grant you access to the other channels. Failure to do so may result in being kicked out.'
+hidden_term_line = ' • When you have finished reading all of the rules, send a message in this channel that includes the sha1 of your discord `name#discriminator`, and we\'ll grant you access to the other channels. You can find your `name#discriminator` under the discord channel list.'
 
 
 class Mod:
