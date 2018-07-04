@@ -1,5 +1,6 @@
 from discord.ext import commands
 import hashlib
+from itertools import chain
 
 class ProbationBot:
     """
@@ -13,11 +14,13 @@ class ProbationBot:
         try:
             if message.channel == self.bot.welcome_channel:
                 member = message.author
-                full_name = member.name + '#' + member.discriminator
-                full_name_hex = hashlib.sha1(full_name.encode('utf-8')).hexdigest()
-                # For those people using a shell and forgetting to use echo -n
-                full_name_endl_hex = hashlib.sha1((full_name + '\n').encode('utf-8')).hexdigest()
-                if full_name_hex in message.content or full_name_endl_hex in message.content:
+                full_name = str(member)
+                allowed_names = ['@' + full_name, full_name, member.id,
+                        '@' + full_name + '\n', full_name + '\n', member.id + '\n']
+
+                hashed_names = [hashlib.sha1(name.encode('utf-8')).hexdigest() for name in allowed_names]
+
+                if any(hashed_name in message.content for hashed_name in hashed_names):
                     # Auto unprobate
                     await self.bot.add_roles(member, self.bot.unprobated_role)
                     await self.bot.delete_message(message)
