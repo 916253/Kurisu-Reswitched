@@ -53,6 +53,8 @@ class NXErr:
         168: 'Userland crash',
         203: 'HID',
         206: 'Capture',
+        345: 'LibNX Error (see https://switchbrew.github.io/libnx/result_8h.html#a0411cd49bb5b71852cecd93bcbf0ca2d for description)',
+        348: 'LibNX nVidia Error (see https://switchbrew.github.io/libnx/result_8h.html#abed82baf7f470b522273a3e37c24c600 for description)'
         651: 'TC',
         669: 'ARP',
         800: 'General web-applet',
