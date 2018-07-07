@@ -168,7 +168,7 @@ class NXErr:
           .serr 0xDC05
           .serr 2005-0110
         """
-        if re.match('[0-9][0-9][0-9][0-9]\-[0-9][0-9][0-9][0-9]', err):
+        if re.match(r'2\d{3}\-\d{4}', err):
             module = int(err[0:4]) - 2000
             desc = int(err[5:9])
             errcode = (desc << 9) + module
@@ -193,8 +193,8 @@ class NXErr:
 
     @commands.command(pass_context=True)
     async def err2hex(self, ctx, err: str):
-        if not re.match('[0-9][0-9][0-9][0-9]\-[0-9][0-9][0-9][0-9]', err):
-            await self.bot.say('Does not follow XXXX-XXXX format')
+        if not re.match(r'2\d{3}\-\d{4}', err):
+            await self.bot.say('Does not follow Switch error format: 2###-####')
         else:
             module = int(err[0:4]) - 2000
             desc = int(err[5:9])
