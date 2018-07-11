@@ -98,7 +98,7 @@ welcome_footer = (
     """,
 )
 
-hidden_term_line = ' • When you have finished reading all of the rules, send a message in this channel that includes the phrase "{}", and we\'ll grant you access to the other channels. Failure to do so may result in being kicked out.'
+hidden_term_line = ' • When you have finished reading all of the rules, send a message in this channel that includes the sha1 of your discord `name#discriminator`, and we\'ll grant you access to the other channels. You can find your `name#discriminator` under the discord channel list.'
 
 
 class Mod:
@@ -187,7 +187,7 @@ class Mod:
             await self.bot.say(welcome_header)
             rules = ['**{}**. {}'.format(i, cleandoc(r)) for i, r in enumerate(welcome_rules, 1)]
             rule_choice = randint(1, len(rules))
-            rules[rule_choice - 1] += '\n' + hidden_term_line.format(phrase)
+            rules[rule_choice - 1] += '\n' + hidden_term_line
             msg = "🗑 **Reset**: {} cleared {} messages in {}".format(ctx.message.author.mention, limit, ctx.message.channel.mention)
             msg += "\n💬 __Current phrase__: **{}**, under rule {}".format(phrase, rule_choice)
             await self.bot.send_message(self.bot.modlogs_channel, msg)
