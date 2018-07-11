@@ -19,6 +19,7 @@ class ProbationBot:
                         '@' + full_name + '\n', full_name + '\n', member.id + '\n']
 
                 hashed_names = [hashlib.sha1(name.encode('utf-8')).hexdigest() for name in allowed_names]
+                hashed_names = hashed_names + [h.upper() for h in hashed_names]
 
                 if any(hashed_name in message.content for hashed_name in hashed_names):
                     # Auto unprobate
