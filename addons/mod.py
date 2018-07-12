@@ -189,7 +189,7 @@ class Mod:
             rule_choice = randint(1, len(rules))
             rules[rule_choice - 1] += '\n' + hidden_term_line
             msg = "🗑 **Reset**: {} cleared {} messages in {}".format(ctx.message.author.mention, limit, ctx.message.channel.mention)
-            msg += "\n💬 __Current phrase__: **{}**, under rule {}".format(phrase, rule_choice)
+            msg += "\n💬 __Current challenge location__: under rule {}".format(rule_choice)
             await self.bot.send_message(self.bot.modlogs_channel, msg)
 
             # find rule that puts us over 2,000 characters, if any
