@@ -147,6 +147,7 @@ async def on_ready():
         bot.private_role = discord.utils.get(server.roles, name="private")
         bot.hacker_role = discord.utils.get(server.roles, name="hacker")
         bot.community_role = discord.utils.get(server.roles, name="community")
+        bot.bot_management_role = discord.utils.get(server.roles, name='bot management')
         bot.everyone_role = server.default_role
 
         bot.staff_ranks = {
