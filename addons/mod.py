@@ -98,7 +98,7 @@ welcome_footer = (
     """,
 )
 
-hidden_term_line = ' • When you have finished reading all of the rules, send a message in this channel that includes the sha1 of your discord `name#discriminator`, and we\'ll grant you access to the other channels. You can find your `name#discriminator` under the discord channel list.'
+hidden_term_line = ' • When you have finished reading all of the rules, send a message in this channel that includes the sha1 hash of your discord `name#discriminator`, and we'll grant you access to the other channels. You can find your `name#discriminator` (your username followed by a ‘#’ and four numbers) under the discord channel list. You can convert your `name#discriminator` to a sha1 hash by Googling a "sha1 hash generator”, and inputting it there.'
 
 
 class Mod:
