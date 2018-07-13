@@ -94,11 +94,11 @@ welcome_footer = (
     **If you are still not sure how to get access to the other channels, please read the rules again.**
     **If you have questions about the rules, feel free to ask here!**
 
-    **Note: We know if you have read the rules or not. If you falsely claim to read the rules, we will kick the first time and ban the second.**
+    **Note: This channel is completely automated. If your message didn't give access to the other channels, you failed the test. Feel free to try again.**
     """,
 )
 
-hidden_term_line = ' • When you have finished reading all of the rules, send a message in this channel that includes the sha1 hash of your discord `name#discriminator`, and we\'ll grant you access to the other channels. You can find your `name#discriminator` (your username followed by a ‘#’ and four numbers) under the discord channel list. You can convert your `name#discriminator` to a sha1 hash by Googling a "sha1 hash generator”, and inputting it there.'
+hidden_term_line = ' • When you have finished reading all of the rules, send a message in this channel that includes the SHA1 hash of your discord `name#discriminator`, and we\'ll grant you access to the other channels. You can find your `name#discriminator` (your username followed by a ‘#’ and four numbers) under the discord channel list.'
 
 
 class Mod:
