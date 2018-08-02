@@ -76,8 +76,6 @@ welcome_footer = (
     #tool-support - Developer focused support. Ask your questions about using PegaSwitch, libtransistor, Mephisto, and other tools here.
 
     #hack-n-all - General hacking, hardware and software development channel for hacking on things *other* than the switch. This is a great place to ask about hacking other systems-- and for the community to have technical discussions.
-
-    #exchange - For hunting switches. People selling switches on low firmwares, and discussion about where to find homebrewable switches should go there.
     """,
 
     """
