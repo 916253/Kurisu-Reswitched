@@ -11,7 +11,9 @@ import time
 welcome_header = """
 <:ReSwitched:326421448543567872> __**Welcome to ReSwitched!**__
 
-__**Be sure you read the following rules and information before participating. If you came here to ask about "backups", this is NOT the place.**__:
+__**Be sure you read the following rules and information before participating. If you came here to ask about "backups", this is NOT the place.**__
+
+__**Got questions about Nintendo Switch hacking? Before asking in the server, please see our FAQ at https://reswitched.team/faq/ to see if your question has already been answered.**__
 
 ​:bookmark_tabs:__Rules:__
 """
@@ -32,7 +34,7 @@ welcome_rules = (
     """,
 
     # 3
-    'If you have concerns about another user, please take up your concerns with a staff member (myself or someone with the "moderator" role in the sidebar) in private. Don\'t publicly call other users out.',
+    'If you have concerns about another user, please take up your concerns with a staff member (someone with the "hop" or "moderator" role in the sidebar) in private. Don\'t publicly call other users out.',
 
     # 4
     """
@@ -67,8 +69,6 @@ welcome_footer = (
     :hash: __Channel Breakdown:__
     #news - Used exclusively for updates on ReSwitched progress and community information. Most major announcements are passed through this channel and whenever something is posted there it's usually something you'll want to look at.
 
-    #vvv-faq - Answers to most frequently asked questions on this server. You'll probably want to read through this.
-
     #switch-hacking-meta - For "meta-discussion" related to hacking the switch. This is where we talk *about* the switch hacking that's going on, and where you can get clarification about the hacks that exist and the work that's being done.
 
     #user-support - End-user focused support, mainly between users. Ask your questions about using switch homebrew here.
@@ -92,7 +92,7 @@ welcome_footer = (
     **If you are still not sure how to get access to the other channels, please read the rules again.**
     **If you have questions about the rules, feel free to ask here!**
 
-    **Note: This channel is completely automated. If your message didn't give access to the other channels, you failed the test. Feel free to try again.**
+    **Note: This channel is completely automated (aside from responding to questions about the rules). If your message didn't give you access to the other channels, you failed the test. Feel free to try again.**
     """,
 )
 
