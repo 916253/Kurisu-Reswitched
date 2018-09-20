@@ -13,7 +13,7 @@ welcome_header = """
 
 __**Be sure you read the following rules and information before participating. If you came here to ask about "backups", this is NOT the place.**__
 
-__**Got questions about Nintendo Switch hacking? Before asking in the server, please see our FAQ at https://reswitched.team/faq/ to see if your question has already been answered.**__
+__**Got questions about Nintendo Switch hacking? Before asking in the server, please see our FAQ at <https://reswitched.team/faq/> to see if your question has already been answered.**__
 
 ​:bookmark_tabs:__Rules:__
 """
