@@ -59,7 +59,7 @@ welcome_rules = (
 
     # 9
     'Absolutely no piracy. There is a zero-tolerance policy and we will enforce this strictly and swiftly.',
-    
+
     # 10
     'The first character of your server nickname should be alphanumeric if you wish to talk in chat.'
 )
@@ -358,9 +358,11 @@ class Mod:
         try:
             for member in ctx.message.mentions:
                 await self.bot.add_roles(member, self.bot.unprobated_role)
-                await self.bot.say("{} is out of probation.".format(member.mention))
-                msg = "⭕️ **Un-probated**: {} un-probated {} | {}#{}".format(ctx.message.author.mention, member.mention, self.bot.escape_name(member.name), self.bot.escape_name(member.discriminator))
-                await self.bot.send_message(self.bot.modlogs_channel, msg)
+            await self.bot.say("Un-probated {}".format(", ".join(member.mention for member in ctx.message.mentions)))
+            unprobated_list = ", ".join("{} | {}#{}".format(member.mention, self.bot.escape_name(member.name), self.bot.escape_name(member.discriminator)) for member in ctx.message.mentions)
+            msg = "⭕️ **Un-probated**: {} un-probated {}".format(ctx.message.author.mention, unprobated_list)
+            await self.bot.send_message(self.bot.modlogs_channel, msg)
+
         except discord.errors.Forbidden:
             await self.bot.say("💢 I don't have permission to do this.")
 
