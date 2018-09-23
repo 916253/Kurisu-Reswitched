@@ -24,7 +24,7 @@ class ProbationBot:
                 await self.bot.add_roles(message.author, self.bot.unprobated_role)
                 await self.bot.purge_from(self.bot.welcome_channel, limit=100, check=lambda m: m.author == message.author or (m.author == self.bot.user and message.author.mention in m.content))
             elif full_name in message.content:
-                await self.bot.send_message(message.channel, message.author.mention + " :no_entry: Incorrect, do not just post your name and discriminator. Please reread the rules carefully")
+                await self.bot.send_message(message.channel, message.author.mention + " :no_entry: Incorrect, you need to do something with that. Please re-read the rules carefully and look up any terms you are not familiar with.")
 
     async def on_message(self, message):
         try:
