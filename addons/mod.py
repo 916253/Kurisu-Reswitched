@@ -127,10 +127,14 @@ class Mod:
         with open("data/restrictions.json", "w") as f:
             json.dump(rsts, f)
 
-    @commands.has_permissions(administrator=True)
-    @commands.command()
-    async def quit(self, *gamename):
+    @commands.command(pass_context=True, hidden=True)
+    async def quit(self, ctx):
         """Stops the bot."""
+        issuer = ctx.message.author
+        if (self.bot.bot_management_role not in issuer.roles) and ((self.bot.owner_role not in issuer.roles)):
+            msg = "{} This command is limited to wizards.".format(issuer.mention)
+            await self.bot.say(msg)
+            return
         await self.bot.say("👋 Bye bye!")
         await self.bot.close()
 
