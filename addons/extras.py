@@ -63,10 +63,10 @@ class Extras:
         )
         await self.bot.say(msg)
 
-
-
-
-
+    @commands.command(pass_context=True)
+    async def rules(self, ctx):
+        """Post a link to the Rules"""
+        await self.bot.say("{}: https://reswitched.team/discord/".format(str(ctx.message.author)))
 
 def setup(bot):
     bot.add_cog(Extras(bot))
