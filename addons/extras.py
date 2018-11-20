@@ -25,7 +25,7 @@ class Extras:
         embed.set_thumbnail(url="http://i.imgur.com/0iDmGQa.png")
         embed.description = "Based off of Kurisu by 916253 and ihaveamac"
         await self.bot.say("", embed=embed)
-
+        
     @commands.command()
     async def membercount(self):
         """Prints the member count of the server."""
@@ -63,10 +63,10 @@ class Extras:
         )
         await self.bot.say(msg)
 
-
-
-
-
+    @commands.command(pass_context=True)
+    async def rules(self, ctx):
+        """Post a link to the Rules"""
+        await self.bot.say("{}: https://reswitched.team/discord/".format(str(ctx.message.author)), embed=embed)
 
 def setup(bot):
     bot.add_cog(Extras(bot))
