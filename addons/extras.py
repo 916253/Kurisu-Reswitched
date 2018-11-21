@@ -64,9 +64,12 @@ class Extras:
         await self.bot.say(msg)
 
     @commands.command(pass_context=True)
-    async def rules(self, ctx):
+    async def rules(self, ctx, mention_user : discord.Member=None):
         """Post a link to the Rules"""
-        await self.bot.say("{}: https://reswitched.team/discord/".format(str(ctx.message.author)))
+        if mention_user:
+            await self.bot.say("{} Please review this servers rules here: <https://reswitched.team/discord/>".format(mention_user.mention))
+        else:
+            await self.bot.say("{} A link to the rules can be found here: <https://reswitched.team/discord/>".format(ctx.message.author.mention))
 
 def setup(bot):
     bot.add_cog(Extras(bot))
