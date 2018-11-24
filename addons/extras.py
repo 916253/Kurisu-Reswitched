@@ -71,5 +71,16 @@ class Extras:
         else:
             await self.bot.say("{} A link to the rules can be found here: <https://reswitched.team/discord/>".format(ctx.message.author.mention))
 
+    @commands.command(pass_context=True)
+    async def guides(self, ctx, mention_user : discord.Member=None):
+        # links guides aimed at end-users
+        guides_links = ["<https://guide.sdsetup.com/> by noahc3",
+                        "<http://switchguide.xyz/> by noirscape",
+                        "<https://switch.hacks.guide/> by Plailect"]
+        if mention_user:
+            await self.bot.say("{}\n{}".format(mention_user.mention, '\n'.join(guides_links)))
+        else:
+            await self.bot.say('\n'.join(guides_links))
+
 def setup(bot):
     bot.add_cog(Extras(bot))
