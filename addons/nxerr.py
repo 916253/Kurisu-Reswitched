@@ -486,14 +486,60 @@ class NXErr:
         0x2B5B: "Failed to map code memory (.data+.bss). ",
         0x315B: "Failed to unmap code memory (.text). ",
         0x335B: "Failed to unmap code memory (.rodata). ",
-        0x355B: "Failed to unmap code memory (.data+.bss). "
+        0x355B: "Failed to unmap code memory (.data+.bss). ",
+
+        # FS Codes
+
+        0x7802: "Error: Specified mount name already exists. ",
+        0xD401: "Error: Passed buffer is not usable for fs library. ",
+        0x7D202: "Error: Specified partition is not found. ",
+        0x7D402: "Error: Specified target is not found. ",
+        0x177202: "Error: Specified operation is not implemented. ",
+        0x177A02: "Error: Specified value is out of range. ",
+        0x2F5A02: "Error: Invalid offset was specified. ",
+        0x2F5C02: "Error: Invalid size was specified.",
+        0x2F5E02: "Error: Null pointer argument was specified. ",
+        0x2EE002: "Error: Precondition violation. ",
+        0x307202: "Error: OpenMode_AllowAppend is required for implicit extension of file size by WriteFile(). ",
+        0x346402: "Error: Enough journal space is not left. ",
+        0x346A02: "Error: The open count of files and directories reached the limitation. ",
+
+        # Fatal
+
+        0x4A2: "Can be triggered by running svcBreak. The svcBreak params have no affect on the value of the thrown error-code.",
+        0xA8: "Userland ARM undefined instruction exception",
+        0x2A8: "Userland ARM prefetch-abort due to PC set to non-executable region",
+        0x4A8: "Userland ARM data abort. Also caused by abnormal process termination via svcExitProcess. Note: directly jumping to nnMain()-retaddr from non-main-thread has the same result.",
+        0x6A8: "Userland PC address not aligned to 4 bytes ",
+        0x10A8: "Can occur when attempting to call an svc outside the whitelist ",
     }
 
     known_errcode_ranges = {
         # NIM
         137: [
             [8001, 8096, 'libcurl error 1-96. Some of the libcurl errors in the error-table map to the above unknown-libcurl-error however.'],
-        ]
+        ],
+
+        # FS
+        2: [
+            [2000, 2499, "Error: Failed to access SD card."],
+            [2500, 2999, "Error: Failed to access game card. "],
+            [3500, 3999, "Error: Failed to access MMC. "],
+            [4001, 4299, "Error: ROM is corrupted. "],
+            [4301, 4499, "Error: Save data is corrupted."],
+            [4501, 4599, "Error: NCA is corrupted."],
+            [4601, 4639, "Error: Integrity verification failed."],
+            [4641, 4659, "Error: Partition FS is corrupted."],
+            [4661, 4679, "Error: Built-in-storage is corrupted."],
+            [4681, 4699, "Error: FAT FS is corrupted."],
+            [4701, 4719, "Error: HOST FS is corrupted."],
+            [5000, 5999, "Error: Unexpected failure occurred."],
+            [6002, 6029, "Error: Invalid path was specified."],
+            [6001, 6199, "Error: Invalid argument was specified."],
+            [6202, 6299, "Error: Invalid operation for the open mode."],
+            [6300, 6399, "Error: Unsupported operation."],
+            [6400, 6499, "Error: Permission denied."],
+        ],
     }
 
     def get_name(self, d, k):
