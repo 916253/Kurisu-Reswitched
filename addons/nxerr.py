@@ -109,7 +109,8 @@ class NXErr:
         345: "libnx ",
         346: "Homebrew ABI ",
         347: "Homebrew Loader ",
-        348: "libnx Nvidia errors ",
+        348: "libnx Nvidia",
+        349: "libnx Binder"
     }
 
     known_errcodes = {
@@ -512,6 +513,111 @@ class NXErr:
         0x4A8: "Userland ARM data abort. Also caused by abnormal process termination via svcExitProcess. Note: directly jumping to nnMain()-retaddr from non-main-thread has the same result.",
         0x6A8: "Userland PC address not aligned to 4 bytes ",
         0x10A8: "Can occur when attempting to call an svc outside the whitelist ",
+
+        # Libnx Errors from libnx/result.h
+
+        # - Normal -
+        0x359: "LibnxError_BadReloc",
+        0x559: "LibnxError_OutOfMemory",
+        0x759: "LibnxError_AlreadyMapped",
+        0x959: "LibnxError_BadGetInfo_Stack",
+        0xB59: "LibnxError_BadGetInfo_Heap",
+        0xD59: "LibnxError_BadQueryMemory",
+        0xF59: "LibnxError_AlreadyInitialized",
+        0x1159: "LibnxError_NotInitialized",
+        0x1359: "LibnxError_NotFound",
+        0x1559: "LibnxError_IoError",
+        0x1759: "LibnxError_BadInput",
+        0x1959: "LibnxError_BadReent",
+        0x1B59: "LibnxError_BufferProducerError",
+        0x1D59: "LibnxError_HandleTooEarly",
+        0x1F59: "LibnxError_HeapAllocFailed",
+        0x2159: "LibnxError_TooManyOverrides",
+        0x2359: "LibnxError_ParcelError",
+        0x2559: "LibnxError_BadGfxInit",
+        0x359: "LibnxError_BadGfxEventWait",
+        0x559: "LibnxError_BadGfxQueueBuffer",
+        0x759: "LibnxError_BadGfxDequeueBuffer",
+        0x959: "LibnxError_AppletCmdidNotFound",
+        0xB59: "LibnxError_BadAppletReceiveMessage",
+        0xD59: "LibnxError_BadAppletNotifyRunning",
+        0xF59: "LibnxError_BadAppletGetCurrentFocusState",
+        0x1159: "LibnxError_BadAppletGetOperationMode",
+        0x1359: "LibnxError_BadAppletGetPerformanceMode",
+        0x1559: "LibnxError_BadUsbCommsRead",
+        0x1759: "LibnxError_BadUsbCommsWrite",
+        0x1959: "LibnxError_InitFail_SM",
+        0x1B59: "LibnxError_InitFail_AM",
+        0x1D59: "LibnxError_InitFail_HID",
+        0x1F59: "LibnxError_InitFail_FS",
+        0x2159: "LibnxError_BadGetInfo_Rng",
+        0x2359: "LibnxError_JitUnavailable",
+        0x2559: "LibnxError_WeirdKernel",
+        0x2759: "LibnxError_IncompatSysVer",
+        0x2959: "LibnxError_InitFail_Time",
+        0x2B59: "LibnxError_TooManyDevOpTabs",
+        0x2D59: "LibnxError_DomainMessageUnknownType",
+        0x2F59: "LibnxError_DomainMessageTooManyObjectIds",
+        0x3159: "LibnxError_AppletFailedToInitialize",
+        0x3359: "LibnxError_ApmFailedToInitialize",
+        0x3559: "LibnxError_NvinfoFailedToInitialize",
+        0x3759: "LibnxError_NvbufFailedToInitialize",
+
+        # - Libnx Binder -
+        0x35D: "LibnxBinderError_Unknown",
+        0x55D: "LibnxBinderError_NoMemory",
+        0x75D: "LibnxBinderError_InvalidOperation",
+        0x95D: "LibnxBinderError_BadValue",
+        0xB5D: "LibnxBinderError_BadType",
+        0xD5D: "LibnxBinderError_NameNotFound",
+        0xF5D: "LibnxBinderError_PermissionDenied",
+        0x115D: "LibnxBinderError_NoInit",
+        0x135D: "LibnxBinderError_AlreadyExists",
+        0x155D: "LibnxBinderError_DeadObject",
+        0x175D: "LibnxBinderError_FailedTransaction",
+        0x195D: "LibnxBinderError_BadIndex",
+        0x1B5D: "LibnxBinderError_NotEnoughData",
+        0x1D5D: "LibnxBinderError_WouldBlock",
+        0x1F5D: "LibnxBinderError_TimedOut",
+        0x215D: "LibnxBinderError_UnknownTransaction",
+        0x235D: "LibnxBinderError_FdsNotAllowed",
+
+        # - LibNX Nvidia -
+        0x35C: "LibnxNvidiaError_Unknown",
+        0x55C: "LibnxNvidiaError_NotImplemented",
+        0x75C: "LibnxNvidiaError_NotSupported",
+        0x95C: "LibnxNvidiaError_NotInitialized",
+        0xB5C: "LibnxNvidiaError_BadParameter",
+        0xD5C: "LibnxNvidiaError_Timeout",
+        0xF5C: "LibnxNvidiaError_InsufficientMemory",
+        0x115C: "LibnxNvidiaError_ReadOnlyAttribute",
+        0x135C: "LibnxNvidiaError_InvalidState",
+        0x155C: "LibnxNvidiaError_InvalidAddress",
+        0x175C: "LibnxNvidiaError_InvalidSize",
+        0x195C: "LibnxNvidiaError_BadValue",
+        0x1B5C: "LibnxNvidiaError_AlreadyAllocated",
+        0x1D5C: "LibnxNvidiaError_Busy",
+        0x1F5C: "LibnxNvidiaError_ResourceError",
+        0x215C: "LibnxNvidiaError_CountMismatch",
+        # These are written as hex already in result.h - Will just copy them ... ?
+        0x1000: "LibnxNvidiaError_SharedMemoryTooSmall",
+        0x30003: "LibnxNvidiaError_FileOperationFailed",
+        0x3000F: "LibnxNvidiaError_IoctlFailed",
+
+        # Non-SwitchBrew Error Codes - Should probably add them to SwitchBrew if you read this
+
+        0x7E12B: 'Eshop connection failed',
+        0x39D689: 'CDN Ban',
+        0x3E8E7C: 'Error in account login/creation',
+        0x3E8EA0: 'Failed connection test',
+        0x1F4E7C: '(normal) console ban',
+        0x27EE7C: '(potential) complete account ban', # This error is still super new, needs more informations
+        # 0x3E8E89: 'Failed to access Firmware Updates - Often because of DNS!',
+        # ^ Also used by libcurl
+
+        # Atmosphere
+
+        0xCAFEF: "Atmosphere: Version Mismatch",
     }
 
     known_errcode_ranges = {
@@ -576,6 +682,8 @@ class NXErr:
             for errcode_range in self.known_errcode_ranges[module]:
                 if desc >= errcode_range[0] and desc <= errcode_range[1]:
                     explanation += errcode_range[2] + '\n\n'
+        else:
+            explanation = "It seems like your error code is unknown. You should report relevant details to <@141532589725974528> so it can be added to the bot. \n \n"
         explanation += 'Module: ' + self.get_name(self.modules, module)
         explanation += '\nDescription: {}'.format(desc)
         embed = discord.Embed(title='0x{:X} / {}'.format(errcode, str_errcode), description=explanation)
