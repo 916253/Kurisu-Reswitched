@@ -70,6 +70,17 @@ class KickBan:
         except discord.errors.Forbidden:
             await self.bot.say("💢 I don't have permission to do this.")
 
+    @commands.has_permissions(kick_members=True)
+    @commands.command(pass_context=True, name="bam")
+    async def bam_member(self, ctx, user, *, reason=""):
+        """Bams a user. Staff only."""
+        try:
+            member = ctx.message.mentions[0]
+        except IndexError:
+            await self.bot.say("Please mention a user.")
+            return
+        await self.bot.say("{} is ̶n͢ow b̕&̡.̷ 👍̡".format(self.bot.escape_name(member)))
+
     @commands.has_permissions(ban_members=True)
     @commands.command(pass_context=True, name="silentban", hidden=True)
     async def silentban_member(self, ctx, user, *, reason=""):
