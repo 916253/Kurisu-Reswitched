@@ -12,16 +12,14 @@ class Meme:
         self.bot = bot
         print('Addon "{}" loaded'.format(self.__class__.__name__))
 
-    @commands.has_permissions(kick_members=True)
-    @commands.command(pass_context=True, name="bam")
+    @commands.command(pass_context=True, hidden=True, name="bam")
     async def bam_member(self, ctx, user: discord.Member, *, reason=""):
-        """Bams a user. Staff only."""
+        """Bams a user owo"""
         await self.bot.say("{} is ̶n͢ow b̕&̡.̷ 👍̡".format(self.bot.escape_name(user)))
 
-    @commands.has_permissions(kick_members=True)
-    @commands.command(pass_context=True, name="warm")
+    @commands.command(pass_context=True, hidden=True, name="warm")
     async def warm_member(self, ctx, user: discord.Member, *, reason=""):
-        """Warms a user :3. Staff only."""
+        """Warms a user :3"""
         await self.bot.say("{} warmed. User is now {}°C.".format(user.mention, str(random.randint(0, 100))))
 
 
