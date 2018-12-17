@@ -1,6 +1,7 @@
 import discord
 import json
 import re
+import asyncio
 from inspect import cleandoc
 from random import randint, choice
 from discord.ext import commands
@@ -211,6 +212,7 @@ class Mod:
 
             for item in messages:
                 await self.bot.say(item)
+                await asyncio.sleep(1)
 
             for x in welcome_footer:
                 await self.bot.say(cleandoc(x))
