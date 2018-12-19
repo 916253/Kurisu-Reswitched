@@ -14,16 +14,24 @@ class ProbationBot:
         if message.channel == self.bot.welcome_channel:
             member = message.author
             full_name = str(member)
+            discrim = member.discriminator
             allowed_names = ['@' + full_name, full_name, member.id,
                     '@' + full_name + '\n', full_name + '\n', member.id + '\n']
+            close_names = ['@' + member.name, member.name, discrim, '#' + discrim,
+                           '@' + member.name + '\n', member.name + '\n', discrim + '\n', '#' + discrim + '\n']
 
             hashed_names = [hashlib.sha1(name.encode('utf-8')).hexdigest() for name in allowed_names]
-            hashed_names = hashed_names + [h.upper() for h in hashed_names]
+            md5_hashed_names = [hashlib.md5(name.encode('utf-8')).hexdigest() for name in allowed_names]
+            hashed_close_names = [hashlib.sha1(name.encode('utf-8')).hexdigest() for name in close_names]
 
-            if any(hashed_name in message.content for hashed_name in hashed_names):
+            if any(hashed_name in message.content.lower() for hashed_name in hashed_names):
                 await self.bot.add_roles(message.author, self.bot.unprobated_role)
                 await self.bot.purge_from(self.bot.welcome_channel, limit=100, check=lambda m: m.author == message.author or (m.author == self.bot.user and message.author.mention in m.content))
-            elif full_name in message.content:
+            elif any(close_name in message.content.lower() for close_name in close_names):
+                await self.bot.send_message(message.channel, message.author.mention + " :no_entry: Close, but incorrect. You got the process right, but you're not doing it on your name and discriminator properly. Please re-read the rules carefully and look up any terms you are not familiar with.")
+            elif any(md5_name in message.content.lower() for md5_name in md5_hashed_names):
+                await self.bot.send_message(message.channel, message.author.mention + " :no_entry: Close, but incorrect. You're processing your name and discriminator properly, but you're not using the right process. Please re-read the rules carefully and look up any terms you are not familiar with.")
+            elif full_name in message.content or member.id in message.content or member.name in message.content or discrim in message.content:
                 await self.bot.send_message(message.channel, message.author.mention + " :no_entry: Incorrect. You need to do something with your name and discriminator instead of just posting it. Please re-read the rules carefully and look up any terms you are not familiar with.")
 
     async def on_message(self, message):
