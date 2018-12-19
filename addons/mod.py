@@ -45,7 +45,7 @@ welcome_rules = (
 
     # 5
     """
-    "Don't spam.
+    Don't spam.
      • For excessively long text, use a service like <https://0bin.net/>.
     """,
 
@@ -189,7 +189,7 @@ class Mod:
 
             await self.bot.say(welcome_header)
             rules = ['**{}**. {}'.format(i, cleandoc(r)) for i, r in enumerate(welcome_rules, 1)]
-            rule_choice = randint(1, len(rules))
+            rule_choice = randint(2, len(rules))
             rules[rule_choice - 1] += '\n' + hidden_term_line
             msg = "🗑 **Reset**: {} cleared {} messages in {}".format(ctx.message.author.mention, limit, ctx.message.channel.mention)
             msg += "\n💬 __Current challenge location__: under rule {}".format(rule_choice)
