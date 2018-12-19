@@ -27,7 +27,7 @@ class ProbationBot:
             if any(hashed_name in message.content.lower() for hashed_name in hashed_names):
                 await self.bot.add_roles(message.author, self.bot.unprobated_role)
                 await self.bot.purge_from(self.bot.welcome_channel, limit=100, check=lambda m: m.author == message.author or (m.author == self.bot.user and message.author.mention in m.content))
-            elif any(close_name in message.content.lower() for close_name in close_names):
+            elif any(close_name in message.content.lower() for close_name in hashed_close_names):
                 await self.bot.send_message(message.channel, message.author.mention + " :no_entry: Close, but incorrect. You got the process right, but you're not doing it on your name and discriminator properly. Please re-read the rules carefully and look up any terms you are not familiar with.")
             elif any(md5_name in message.content.lower() for md5_name in md5_hashed_names):
                 await self.bot.send_message(message.channel, message.author.mention + " :no_entry: Close, but incorrect. You're processing your name and discriminator properly, but you're not using the right process. Please re-read the rules carefully and look up any terms you are not familiar with.")
