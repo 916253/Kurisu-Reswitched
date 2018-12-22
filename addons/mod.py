@@ -31,11 +31,11 @@ welcome_rules = (
     Be nice to each other. It's fine to disagree, it's not fine to insult or attack other people.
      • You may disagree with anyone or anything you like, but you should try to keep it to opinions, and not people. Avoid vitriol.
      • Constant antagonistic behavior is considered uncivil and appropriate action will be taken.
-     • The use of derogatory slurs -- sexist, racist, homophobic, or otherwise -- is unacceptable and may be grounds for an immediate ban.
+     • The use of derogatory slurs -- sexist, racist, homophobic, transphobic, or otherwise -- is unacceptable and may be grounds for an immediate ban.
     """,
 
     # 3
-    'If you have concerns about another user, please take up your concerns with a staff member (someone with the "hop" or "moderator" role in the sidebar) in private. Don\'t publicly call other users out.',
+    'If you have concerns about another user, please take up your concerns with a staff member (someone with the "mod" role in the sidebar) in private. Don\'t publicly call other users out.',
 
     # 4
     """
