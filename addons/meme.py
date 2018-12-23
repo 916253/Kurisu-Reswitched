@@ -12,21 +12,20 @@ class Meme:
         self.bot = bot
         print('Addon "{}" loaded'.format(self.__class__.__name__))
 
-    def check_if_mod_or_ot(self, ctx):
+    def check_if_ot(self, ctx):
         is_ot = (ctx.channel.name == "off-topic")
-        is_mod = any(r.name == "mod" for r in ctx.author.roles)
-        return (is_ot or is_mod)
+        return is_ot
 
     @commands.command(pass_context=True, hidden=True, name="bam")
     async def bam_member(self, ctx, user: discord.Member, *, reason=""):
         """Bams a user owo"""
-        if self.check_if_mod_or_ot(ctx):
+        if self.check_if_ot(ctx):
             await self.bot.say("{} is ̶n͢ow b̕&̡.̷ 👍̡".format(self.bot.escape_name(user)))
 
     @commands.command(pass_context=True, hidden=True, name="warm")
     async def warm_member(self, ctx, user: discord.Member, *, reason=""):
         """Warms a user :3"""
-        if self.check_if_mod_or_ot(ctx):
+        if self.check_if_ot(ctx):
             await self.bot.say("{} warmed. User is now {}°C.".format(user.mention, str(random.randint(0, 100))))
 
     @commands.command(hidden=True)
