@@ -695,13 +695,13 @@ class NXErr:
     # Game Erros - Strings because Nintendo decided that it would be useless to put them into normal ints ;^)
     # Attention: These need to be formatted -> <errcode>: "<game>: <description>" - Also Nintendo support codes
     nin_err = {
-        #Splatoon 2
+        # Splatoon 2
         "2-AAB6A-3400": "Splatoon 2: A kick from online due to exefs edits.",
 
-        #Youtube
+        # Youtube
         "2-ARVHA-0000": "Youtube: Unknown Error",
 
-        #Nintendo Support Page
+        # Nintendo Support Page
         "2005-0003": "This error code may indicate an issue related to the microSD card being used. (https://en-americas-support.nintendo.com/app/answers/detail/a_id/22393/p/897)",
         "2110-1100": "This error code typically indicates that the Nintendo Switch console was unable to detect a network which matches any of the saved networks within the Internet settings. (https://en-americas-support.nintendo.com/app/answers/detail/a_id/22780/p/897)",
         "2618-0516": "This error code generally indicates that your network is not optimal for peer to peer connections, likely due to your network's NAT type. (https://en-americas-support.nintendo.com/app/answers/detail/a_id/25855/p/897)",
@@ -786,7 +786,7 @@ class NXErr:
             return
         # Return back to normal guidelines
         else:
-            explanation = "It seems like your error code is unknown. You should report relevant details to <@141532589725974528> so it can be added to the bot. \n \n"
+            explanation = "It seems like your error code is unknown. You should report relevant details to <@141532589725974528> (tomGER) so it can be added to the bot. \n \n"
         explanation += 'Module: ' + self.get_name(self.modules, module)
         explanation += '\nDescription: {}'.format(desc)
         embed = discord.Embed(title='0x{:X} / {}'.format(errcode, str_errcode), description=explanation)
